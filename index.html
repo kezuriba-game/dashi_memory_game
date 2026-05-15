@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>節🐟神経衰弱</title>
+<title>出汁メモリーゲーム</title>
 
 <style>
 body{
@@ -45,10 +45,6 @@ h1{
     object-fit:cover;
 }
 
-.hidden{
-    background:#2c3e50;
-}
-
 #message{
     margin-top:20px;
     font-size:24px;
@@ -72,7 +68,7 @@ h1{
 
 <script>
 
-const items = [
+const allItems = [
   {name:"あご煮干", image:"images/ago.png"},
   {name:"あじ煮干", image:"images/aji.png"},
   {name:"エソ煮干", image:"images/eso.png"},
@@ -82,9 +78,6 @@ const items = [
   {name:"さんま煮干", image:"images/sanma.png"},
   {name:"白口煮干", image:"images/shirokuchi.png"}
 ];
-
-let cards = [...items, ...items];
-cards.sort(() => Math.random() - 0.5);
 
 const game = document.getElementById("game");
 
@@ -100,88 +93,124 @@ function updateUI(){
 }
 
 const timer = setInterval(() => {
+
     time--;
+
     updateUI();
 
     if(time <= 0){
+
         clearInterval(timer);
-        document.getElementById("message").textContent = "ゲームオーバー！";
+
+        document.getElementById("message").textContent =
+        "ゲームオーバー！";
+
         lock = true;
     }
+
 },1000);
 
-cards.forEach(item => {
+function startStage(){
 
-    const card = document.createElement("div");
-    card.classList.add("card","hidden");
+    matched = 0;
 
-    card.dataset.name = item.name;
+    game.innerHTML = "";
 
-    card.onclick = () => {
+    firstCard = null;
 
-        if(lock || card.classList.contains("open")) return;
+    lock = false;
 
-        card.classList.add("open");
+    // ランダムで8種類選ぶ
+    const shuffled = [...allItems].sort(() => Math.random() - 0.5);
 
-        card.innerHTML = `
-        <img src="${item.image}">
-        `;
+    const selected = shuffled.slice(0,8);
 
-        if(!firstCard){
+    const cards = [...selected, ...selected]
+    .sort(() => Math.random() - 0.5);
 
-            firstCard = card;
+    cards.forEach(item => {
 
-        }else{
+        const card = document.createElement("div");
 
-            if(firstCard.dataset.name === card.dataset.name){
+        card.classList.add("card");
 
-                score += 100;
-                matched++;
+        card.dataset.name = item.name;
 
-                document.getElementById("message").textContent =
-                "正解！";
+        card.onclick = () => {
 
-                firstCard = null;
+            if(lock || card.classList.contains("open")) return;
 
-                if(matched === items.length){
+            card.classList.add("open");
 
-                    clearInterval(timer);
+            card.innerHTML = `
+            <img src="${item.image}">
+            `;
 
-                    document.getElementById("message").textContent =
-                    "🎉クリア！🎉";
-                }
+            if(!firstCard){
+
+                firstCard = card;
 
             }else{
 
-                lock = true;
+                if(firstCard.dataset.name === card.dataset.name){
 
-                document.getElementById("message").textContent =
-                "ミス！";
+                    score += 100;
 
-                setTimeout(() => {
+                    matched++;
 
-                    firstCard.innerHTML = "";
-                    card.innerHTML = "";
-
-                    firstCard.classList.remove("open");
-                    card.classList.remove("open");
+                    document.getElementById("message").textContent =
+                    "正解！";
 
                     firstCard = null;
-                    lock = false;
 
-                },800);
+                    if(matched === selected.length){
+
+                        document.getElementById("message").textContent =
+                        "🎉ステージクリア！🎉";
+
+                        setTimeout(() => {
+
+                            startStage();
+
+                        },1500);
+                    }
+
+                }else{
+
+                    lock = true;
+
+                    document.getElementById("message").textContent =
+                    "ミス！";
+
+                    setTimeout(() => {
+
+                        firstCard.innerHTML = "";
+
+                        card.innerHTML = "";
+
+                        firstCard.classList.remove("open");
+
+                        card.classList.remove("open");
+
+                        firstCard = null;
+
+                        lock = false;
+
+                    },800);
+                }
+
+                updateUI();
             }
+        };
 
-            updateUI();
-        }
+        game.appendChild(card);
 
-    };
+    });
 
-    game.appendChild(card);
+    updateUI();
+}
 
-});
-
-updateUI();
+startStage();
 
 </script>
 
