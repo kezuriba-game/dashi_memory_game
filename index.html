@@ -1,10 +1,12 @@
+```html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>出汁メモリーゲーム</title>
+<title>だし神経衰弱</title>
 
 <style>
+
 body{
     font-family:sans-serif;
     background:#f4f1ea;
@@ -13,6 +15,7 @@ body{
 
 h1{
     margin-top:20px;
+    color:#333;
 }
 
 #status{
@@ -37,6 +40,11 @@ h1{
     align-items:center;
     justify-content:center;
     overflow:hidden;
+    transition:0.2s;
+}
+
+.card:hover{
+    transform:scale(1.03);
 }
 
 .card img{
@@ -49,13 +57,15 @@ h1{
     margin-top:20px;
     font-size:24px;
     font-weight:bold;
+    color:#444;
 }
+
 </style>
 </head>
 
 <body>
 
-<h1>🐟 出汁メモリーゲーム</h1>
+<h1>🐟 だし神経衰弱</h1>
 
 <div id="status">
 ⏱ 残り時間: <span id="time">60</span>秒　
@@ -69,6 +79,7 @@ h1{
 <script>
 
 const allItems = [
+
   {name:"あご煮干", image:"images/ago.png"},
   {name:"あじ煮干", image:"images/aji.png"},
   {name:"エソ煮干", image:"images/eso.png"},
@@ -77,6 +88,7 @@ const allItems = [
   {name:"片口煮干", image:"images/katakuchi.png"},
   {name:"さんま煮干", image:"images/sanma.png"},
   {name:"白口煮干", image:"images/shirokuchi.png"}
+
 ];
 
 const game = document.getElementById("game");
@@ -88,8 +100,10 @@ let matched = 0;
 let time = 60;
 
 function updateUI(){
+
     document.getElementById("score").textContent = score;
     document.getElementById("time").textContent = time;
+
 }
 
 const timer = setInterval(() => {
@@ -121,10 +135,12 @@ function startStage(){
     lock = false;
 
     // ランダムで8種類選ぶ
-    const shuffled = [...allItems].sort(() => Math.random() - 0.5);
+    const shuffled = [...allItems]
+    .sort(() => Math.random() - 0.5);
 
     const selected = shuffled.slice(0,8);
 
+    // ペアを作る
     const cards = [...selected, ...selected]
     .sort(() => Math.random() - 0.5);
 
@@ -152,6 +168,7 @@ function startStage(){
 
             }else{
 
+                // 正解
                 if(firstCard.dataset.name === card.dataset.name){
 
                     score += 100;
@@ -163,7 +180,10 @@ function startStage(){
 
                     firstCard = null;
 
+                    // 全部そろった
                     if(matched === selected.length){
+
+                        lock = true;
 
                         document.getElementById("message").textContent =
                         "🎉ステージクリア！🎉";
@@ -177,6 +197,7 @@ function startStage(){
 
                 }else{
 
+                    // 不正解
                     lock = true;
 
                     document.getElementById("message").textContent =
@@ -185,11 +206,9 @@ function startStage(){
                     setTimeout(() => {
 
                         firstCard.innerHTML = "";
-
                         card.innerHTML = "";
 
                         firstCard.classList.remove("open");
-
                         card.classList.remove("open");
 
                         firstCard = null;
@@ -197,10 +216,13 @@ function startStage(){
                         lock = false;
 
                     },800);
+
                 }
 
                 updateUI();
+
             }
+
         };
 
         game.appendChild(card);
@@ -208,6 +230,7 @@ function startStage(){
     });
 
     updateUI();
+
 }
 
 startStage();
@@ -216,3 +239,4 @@ startStage();
 
 </body>
 </html>
+```
