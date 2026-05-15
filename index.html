@@ -98,10 +98,10 @@ const allItems = [
   {name:"いか煮干", image:"images/ika.png"},
   {name:"片口煮干", image:"images/katakuchi.png"},
   {name:"さんま煮干", image:"images/sanma.png"},
+  {name:"白口煮干", image:"images/shirokuchi.png"},
   {name:"たい煮干", image:"images/tai.png"},
   {name:"かき煮干", image:"images/kaki.png"},
-  {name:"さば煮干", image:"images/saba.png"},
-  {name:"白口煮干", image:"images/shirokuchi.png"}
+  {name:"さば煮干", image:"images/saba.png"}
 ];
 
 const game = document.getElementById("game");
@@ -139,7 +139,7 @@ function startTimer(){
             document.getElementById("message").textContent =
             "ゲームオーバー！";
 
-            retryButton.style.display = "inline-block";
+            retryButton.style.display = "block";
 
             lock = true;
         }
@@ -163,7 +163,7 @@ function startStage(){
     const shuffled = [...allItems]
     .sort(() => Math.random() - 0.5);
 
-    const selected = shuffled.slice(0,8);
+    const selected = shuffled.slice(0, Math.min(8, allItems.length));
 
     const cards = [...selected, ...selected]
     .sort(() => Math.random() - 0.5);
