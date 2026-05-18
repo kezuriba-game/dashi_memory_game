@@ -379,41 +379,37 @@ function createStage(){
                 lock = true;
 
                 if(firstCard.dataset.name === secondCard.dataset.name){
-
-                    firstCard.classList.add("glow");
-　　　　　　　　　　　　secondCard.classList.add("glow");
-
-　　　　　　　　　　　　score += 100;
-　　　　　　　　　　　　matched++;
-
-　　　　　　　　　　if(!discovered.includes(item.name)){
-  　　　　　　　　　　  discovered.push(item.name);
-   　　　　　　　 　　　const set = new Set(discovered);
- 　　　　　　　　　　   discovered = [...set];
-      　　　　　　　　 localStorage.setItem("discovered", JSON.stringify(discovered));
-　　　　　　　　　　}
-
-　　　　　　　　　　document.getElementById("message").textContent = "⭕ 正解！";
-
-　　　　　　　　　　const card1 = firstCard;
-　　　　　　　　　　const card2 = secondCard;
 　
-　　　　　　　　　　setTimeout(() => {
+ 　　　　　　　　　   firstCard.classList.add("glow");
+  　　　　　　　　　  secondCard.classList.add("glow");
 
-  　　　　　　　　　　　  card1.classList.remove("glow");
- 　　　　　　　　　　　   card2.classList.remove("glow");
+   　　　　　　　　　　score += 100;
+    　　　　　　　　　 matched++;
 
-　　　　　　　　　　　    card1.classList.add("matched");
-　　　　　　　　　　　    card2.classList.add("matched");
+ 　　　　　　　   if(!discovered.includes(item.name)){
+      　　　　　　　  discovered.push(item.name);
+    　　　　　　　    localStorage.setItem("discovered", JSON.stringify(discovered));
+   　　　　　　　 }
 
-   　　　　　　　　　　　 card1.innerHTML = "";
-  　　　　　　　　　　　  card2.innerHTML = "";
+   　　　　　　　 document.getElementById("message").textContent = "⭕ 正解！";
 
-    　　　　　　　　　　　firstCard = null;
-   　　　　　　　　　　　 secondCard = null;
- 　　　　　　　　　　　   lock = false;
+ 　　　　　　　　　const card1 = firstCard;
+ 　　　　　　　　  const card2 = secondCard;
 
-　　　　　　　　　　　}, 500);
+　　　　　　      setTimeout(() => {
+
+                   card1.classList.remove("glow");
+                   card2.classList.remove("glow");
+
+                   card1.classList.add("matched");
+                   card2.classList.add("matched");
+
+                   firstCard = null;
+                   secondCard = null;
+                   lock = false;
+
+                }, 500);
+                }
 
                     if(matched >= stage.pairs){
 
