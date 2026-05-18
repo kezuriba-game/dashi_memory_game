@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>だし神経衰弱</title>
 
 <style>
@@ -10,61 +11,67 @@ body{
     font-family:sans-serif;
     background:#f4f1ea;
     text-align:center;
+    margin:0;
+    padding:20px;
 }
 
 h1{
-    margin-top:20px;
     color:#333;
 }
 
 #status{
     margin:15px;
-    font-size:20px;
+    font-size:18px;
+    line-height:1.8;
 }
 
 #game{
     display:grid;
-    grid-template-columns:repeat(4,150px);
-    gap:12px;
+    gap:10px;
     justify-content:center;
     margin-top:20px;
 }
 
 .card{
-    width:150px;
-    height:150px;
+    width:90px;
+    height:90px;
     background:#2c3e50;
-    border-radius:12px;
+    border-radius:10px;
     cursor:pointer;
     display:flex;
     align-items:center;
     justify-content:center;
     overflow:hidden;
     transition:0.2s;
-}
-
-.card:hover{
-    transform:scale(1.03);
+    color:white;
+    font-size:12px;
+    text-align:center;
+    padding:4px;
+    box-sizing:border-box;
+    flex-direction:column;
 }
 
 .card img{
     width:100%;
-    height:100%;
+    height:70%;
     object-fit:cover;
+}
+
+.card-name{
+    margin-top:4px;
 }
 
 #message{
     margin-top:20px;
-    font-size:24px;
+    font-size:22px;
     font-weight:bold;
-    color:#444;
     min-height:40px;
 }
 
-#startButton{
-    margin:20px auto;
-    padding:14px 28px;
-    font-size:20px;
+.button{
+    margin:10px auto;
+    padding:14px 24px;
+    font-size:18px;
     border:none;
     border-radius:12px;
     background:#ffb347;
@@ -72,24 +79,49 @@ h1{
     display:block;
 }
 
+#difficultyButtons{
+    margin-top:20px;
+}
+
+@media screen and (max-width:700px){
+
+    .card{
+        width:72px;
+        height:72px;
+        font-size:10px;
+    }
+
+    #status{
+        font-size:15px;
+    }
+
+}
+
 </style>
 </head>
 
 <body>
 
-<h1>だし神経衰弱</h1>
+<h1>🐟 だし神経衰弱</h1>
 
 <div id="status">
-🎮 ステージ: <span id="stage">1</span>　
-⏱ 残り時間: <span id="time">60</span>秒　
+🎮 難易度: <span id="difficulty">-</span><br>
+📚 ステージ: <span id="stage">1</span> / 6<br>
+⏱ 残り時間: <span id="time">60</span>秒<br>
 🏆 スコア: <span id="score">0</span>
 </div>
 
 <div id="message">
-「ゲームスタート」を押して開始！
+難易度を選んでね！
 </div>
 
-<button id="startButton">
+<div id="difficultyButtons">
+    <button class="button" onclick="selectDifficulty('beginner')">初級</button>
+    <button class="button" onclick="selectDifficulty('middle')">中級</button>
+    <button class="button" onclick="selectDifficulty('hard')">上級</button>
+</div>
+
+<button id="startButton" class="button" style="display:none;">
 ゲームスタート
 </button>
 
@@ -97,40 +129,98 @@ h1{
 
 <script>
 
-const allItems = [
+const difficulties = {
 
-  {name:"あご煮干", image:"images/ago.png"},
-  {name:"あじ煮干", image:"images/aji.png"},
-  {name:"えそ煮干", image:"images/eso.png"},
-  {name:"平子煮干", image:"images/hirako.png"},
-  {name:"いか煮干", image:"images/ika.png"},
-  {name:"片口煮干", image:"images/katakuchi.png"},
-  {name:"さんま煮干", image:"images/sanma.png"},
-  {name:"白口煮干", image:"images/shirokuchi.png"},
-  {name:"たい煮干", image:"images/tai.png"},
-  {name:"かき煮干", image:"images/kaki.png"},
-  {name:"さば煮干", image:"images/saba.png"}
+  beginner: [
+    {name:"中国昆布", image:"images/chugokukonbu.png"},
+    {name:"羅臼昆布", image:"images/rausukonbu.png"},
+    {name:"真昆布", image:"images/makonbu.png"},
+    {name:"しいたけ", image:"images/shitake.png"},
+    {name:"いたや貝", image:"images/itayagai.png"},
+    {name:"むきえび", image:"images/mukiebi.png"},
+    {name:"素干えび", image:"images/suboshiebi.png"},
+    {name:"いか下足", image:"images/ikageso.png"},
+    {name:"ばらのり", image:"images/baranori.png"},
+    {name:"焼きのり", image:"images/yakinori.png"}
+  ],
+
+  middle: [
+    {name:"あご煮干", image:"images/ago.png"},
+    {name:"あじ煮干", image:"images/aji.png"},
+    {name:"えそ煮干", image:"images/eso.png"},
+    {name:"平子煮干", image:"images/hirako.png"},
+    {name:"いか煮干", image:"images/ika.png"},
+    {name:"片口煮干", image:"images/katakuchi.png"},
+    {name:"さんま煮干", image:"images/sanma.png"},
+    {name:"白口煮干", image:"images/shirokuchi.png"},
+    {name:"たい煮干", image:"images/tai.png"},
+    {name:"かき煮干", image:"images/kaki.png"},
+    {name:"さば煮干", image:"images/saba.png"},
+    {name:"うるめ煮干", image:"images/urume.png"}
+  ],
+
+  hard: [
+    {name:"かつお枯節", image:"images/katsuo-karebushi.png"},
+    {name:"かつお荒節", image:"images/katsuo-arabushi.png"},
+    {name:"宗田枯節", image:"images/souda-karebushi.png"},
+    {name:"宗田荒節", image:"images/souda-arabushi.png"},
+    {name:"さば枯節", image:"images/saba-karebushi.png"},
+    {name:"さば荒節", image:"images/saba-arabushi.png"},
+    {name:"むろあじ節", image:"images/muroajibushi.png"},
+    {name:"さんま節", image:"images/sanmabushi.png"},
+    {name:"うるめ節", image:"images/urumebushi.png"},
+    {name:"平子節", image:"images/hirakobushi.png"}
+  ]
+
+};
+
+const stages = [
+  {pairs:6, columns:3, text:true},
+  {pairs:8, columns:4, text:true},
+  {pairs:10, columns:5, text:true},
+  {pairs:6, columns:3, text:false},
+  {pairs:8, columns:4, text:false},
+  {pairs:10, columns:5, text:false}
 ];
 
 const game = document.getElementById("game");
 const startButton = document.getElementById("startButton");
 
+let selectedDifficulty = "";
+let currentStage = 0;
+let score = 0;
+let time = 60;
+let timer;
+
 let firstCard = null;
 let secondCard = null;
 let lock = true;
-
-let score = 0;
 let matched = 0;
-let stage = 1;
-let time = 60;
-
-let timer;
 
 function updateUI(){
 
     document.getElementById("score").textContent = score;
     document.getElementById("time").textContent = time;
-    document.getElementById("stage").textContent = stage;
+    document.getElementById("stage").textContent = currentStage + 1;
+
+}
+
+function selectDifficulty(level){
+
+    selectedDifficulty = level;
+
+    const names = {
+        beginner:"初級",
+        middle:"中級",
+        hard:"上級"
+    };
+
+    document.getElementById("difficulty").textContent = names[level];
+
+    document.getElementById("message").textContent =
+    "ゲームスタートを押してね！";
+
+    startButton.style.display = "block";
 
 }
 
@@ -158,10 +248,14 @@ function startTimer(){
         }
 
     },1000);
-
 }
 
 function createStage(){
+
+    const stage = stages[currentStage];
+
+    game.style.gridTemplateColumns =
+    `repeat(${stage.columns}, 1fr)`;
 
     matched = 0;
 
@@ -170,12 +264,11 @@ function createStage(){
 
     game.innerHTML = "";
 
-    const shuffled = [...allItems]
-    .sort(() => Math.random() - 0.5);
+    const items = [...difficulties[selectedDifficulty]]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, stage.pairs);
 
-    const selected = shuffled.slice(0, Math.min(8, allItems.length));
-
-    const cards = [...selected, ...selected]
+    const cards = [...items, ...items]
     .sort(() => Math.random() - 0.5);
 
     cards.forEach(item => {
@@ -194,8 +287,19 @@ function createStage(){
 
             if(card.classList.contains("matched")) return;
 
-            card.innerHTML =
-            `<img src="${item.image}">`;
+            if(stage.text){
+
+                card.innerHTML = `
+                <img src="${item.image}">
+                <div class="card-name">${item.name}</div>
+                `;
+
+            }else{
+
+                card.innerHTML = `
+                <img src="${item.image}">
+                `;
+            }
 
             if(!firstCard){
 
@@ -207,14 +311,13 @@ function createStage(){
 
                 lock = true;
 
-                // 正解
                 if(firstCard.dataset.name === secondCard.dataset.name){
 
                     firstCard.classList.add("matched");
                     secondCard.classList.add("matched");
 
-                    score += 100;
                     matched++;
+                    score += 100;
 
                     updateUI();
 
@@ -226,23 +329,33 @@ function createStage(){
 
                     lock = false;
 
-                    // ステージクリア
-                    if(matched >= selected.length){
+                    if(matched >= stage.pairs){
 
                         clearInterval(timer);
 
                         lock = true;
 
-                        document.getElementById("message").textContent =
-                        "🎉 ステージクリア！";
+                        if(currentStage >= stages.length - 1){
 
-                        stage++;
+                            document.getElementById("message").textContent =
+                            "🏆 全ステージクリア！";
 
-                        startButton.textContent =
-                        "次のステージへ";
+                            startButton.textContent = "最初から遊ぶ";
 
-                        startButton.style.display =
-                        "block";
+                            currentStage = 0;
+
+                        }else{
+
+                            document.getElementById("message").textContent =
+                            "🎉 ステージクリア！";
+
+                            currentStage++;
+
+                            startButton.textContent =
+                            "次のステージへ";
+                        }
+
+                        startButton.style.display = "block";
                     }
 
                 }else{
@@ -260,36 +373,32 @@ function createStage(){
 
                         lock = false;
 
-                    },800);
-
+                    },700);
                 }
-
             }
-
         };
 
         game.appendChild(card);
-
     });
-
 }
 
 startButton.onclick = () => {
+
+    if(!selectedDifficulty) return;
 
     time = 60;
 
     updateUI();
 
+    lock = false;
+
     startButton.style.display = "none";
 
     document.getElementById("message").textContent = "";
 
-    lock = false;
-
     createStage();
 
     startTimer();
-
 };
 
 updateUI();
