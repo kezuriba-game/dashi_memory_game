@@ -129,6 +129,12 @@ h1{
 ゲームスタート
 </button>
 
+<button class="button" onclick="toggleZukan()">
+📖 出汁図鑑 
+</button> 
+    
+<div id="zukan" style="display:none;"></div>
+
 <div id="game"></div>
 
 <script>
@@ -211,7 +217,9 @@ let firstCard = null;
 let secondCard = null;
 
 let lock = true;
+    
 let matched = 0;
+    let discovered = [];
 
 function updateUI(){
 
@@ -358,6 +366,12 @@ function createStage(){
 
                     score += 100;
 
+                    if(!discovered.includes(item.name)){
+
+    　　　　　　　　　　　　discovered.push(item.name);
+
+　　　　　　　　　　　　}
+
                     updateUI();
 
                     document.getElementById("message").textContent =
@@ -451,6 +465,54 @@ startButton.onclick = () => {
 };
 
 updateUI();
+
+function toggleZukan(){
+
+    const zukan =
+    document.getElementById("zukan");
+
+    if(zukan.style.display === "none"){
+
+        zukan.style.display = "block";
+
+        let html = `
+        <h2>📖 出汁図鑑</h2>
+        `;
+
+        if(discovered.length === 0){
+
+            html += `
+            <p>まだ何も発見してない！</p>
+            `;
+
+        }
+
+        discovered.forEach(name => {
+
+            html += `
+            <div style="
+                background:white;
+                margin:10px auto;
+                padding:12px;
+                border-radius:12px;
+                width:220px;
+                font-size:18px;
+            ">
+                ${name}
+            </div>
+            `;
+
+        });
+
+        zukan.innerHTML = html;
+
+    }else{
+
+        zukan.style.display = "none";
+
+    }
+
+}
 
 </script>
 
