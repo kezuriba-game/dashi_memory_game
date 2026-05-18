@@ -103,24 +103,28 @@ onclick="location.href='index.html'">
 const items = [
 
 {
+category:"初級",
 name:"中国昆布",
 image:"images/chugokukonbu.jpg",
 text:"中国産の昆布。比較的やさしい旨味。"
 },
 
 {
+category:"中級",
 name:"羅臼昆布",
 image:"images/rausukonbu.jpg",
 text:"香りが強く濃厚なだし。"
 },
 
 {
+category:"初級",
 name:"真昆布",
 image:"images/makonbu.jpg",
 text:"上品で澄んだだしが取れる。"
 },
 
 {
+category:"上級",
 name:"しいたけ",
 image:"images/shitake.jpg",
 text:"独特の香りと旨味を持つ。"
@@ -131,29 +135,54 @@ text:"独特の香りと旨味を持つ。"
 const zukan =
 document.getElementById("zukan");
 
-items.forEach(item => {
+const categories = {
+
+    "初級":10,
+    "中級":12,
+    "上級":10
+
+};
+
+Object.keys(categories).forEach(category => {
+
+    const filtered =
+    items.filter(item =>
+    item.category === category);
 
     zukan.innerHTML += `
-
-    <div class="card">
-
-        <img src="${item.image}">
-
-<div>
-
-        <div class="name">
-        ${item.name}
-        </div>
-
-        <div class="text">
-        ${item.text}
-        </div>
-
-    </div>
-    
-</div>
-
+    <h2 style="
+    margin-top:40px;
+    ">
+    ${category}
+    （${filtered.length} / ${categories[category]}）
+    </h2>
     `;
+
+    filtered.forEach(item => {
+
+        zukan.innerHTML += `
+
+        <div class="card">
+
+            <img src="${item.image}">
+
+            <div>
+
+                <div class="name">
+                ${item.name}
+                </div>
+
+                <div class="text">
+                ${item.text}
+                </div>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
 
 });
 
