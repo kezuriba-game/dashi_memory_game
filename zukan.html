@@ -1,0 +1,144 @@
+```html id="jlwm9r"
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>出汁図鑑</title>
+
+<style>
+
+body{
+    font-family:sans-serif;
+    background:#f4f1ea;
+    text-align:center;
+    padding:20px;
+}
+
+h1{
+    margin-bottom:30px;
+}
+
+.button{
+    margin:10px;
+    padding:14px 24px;
+    font-size:18px;
+    border:none;
+    border-radius:12px;
+    background:#f7e045;
+    color:#091a70;
+    cursor:pointer;
+}
+
+#zukan{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(180px,1fr));
+    gap:20px;
+    margin-top:30px;
+}
+
+.card{
+    background:white;
+    border-radius:16px;
+    padding:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.card img{
+    width:100%;
+    border-radius:12px;
+}
+
+.name{
+    margin-top:10px;
+    font-weight:bold;
+    font-size:18px;
+}
+
+.text{
+    margin-top:8px;
+    font-size:14px;
+    line-height:1.6;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>📖 出汁図鑑</h1>
+
+<button class="button"
+onclick="location.href='index.html'">
+🎮 ゲームへ戻る
+</button>
+
+<div id="zukan"></div>
+
+<script>
+
+const items = [
+
+{
+name:"中国昆布",
+image:"images/chugokukonbu.jpg",
+text:"中国産の昆布。比較的やさしい旨味。"
+},
+
+{
+name:"羅臼昆布",
+image:"images/rausukonbu.jpg",
+text:"香りが強く濃厚なだし。"
+},
+
+{
+name:"真昆布",
+image:"images/makonbu.jpg",
+text:"上品で澄んだだしが取れる。"
+},
+
+{
+name:"しいたけ",
+image:"images/shitake.jpg",
+text:"独特の香りと旨味を持つ。"
+}
+
+];
+
+const zukan =
+document.getElementById("zukan");
+
+items.forEach(item => {
+
+    zukan.innerHTML += `
+
+    <div class="card">
+
+        <img src="${item.image}">
+
+        <div class="name">
+        ${item.name}
+        </div>
+
+        <div class="text">
+        ${item.text}
+        </div>
+
+    </div>
+
+    `;
+
+});
+
+</script>
+
+</body>
+</html>
+```
