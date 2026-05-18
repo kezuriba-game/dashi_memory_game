@@ -383,21 +383,33 @@ function createStage(){
 　　　　　　　　　　　　matched++;
 
 　　　　　　　　　　if(!discovered.includes(item.name)){
- 　　　　　　　　　　   discovered.push(item.name);
+　　　　　　　　　　    discovered.push(item.name);
  　　　　　　　　　　   const set = new Set(discovered);
- 　　　　　　　　　　   discovered = [...set];
- 　　　　　　　　　　   localStorage.setItem("discovered", JSON.stringify(discovered));
+　　　　　　　　　　    discovered = [...set];
+　　　　　　　　　　    localStorage.setItem("discovered", JSON.stringify(discovered));
 　　　　　　　　　　}
 
 　　　　　　　　　　document.getElementById("message").textContent = "⭕ 正解！";
 
+　　　　　　　　　　const card1 = firstCard;
+　　　　　　　　　　const card2 = secondCard;
+
 　　　　　　　　　　setTimeout(() => {
 
-  　　　　　　　  firstCard.classList.remove("glow");
- 　　　　　　　   secondCard.classList.remove("glow");
+ 　　　　　　　　  　　 card1.classList.remove("glow");
+ 　　　　　　　　　　   card2.classList.remove("glow");
 
- 　　　　　　　   firstCard.classList.add("matched");
- 　　　　　　　   secondCard.classList.add("matched");
+　　　　　　　　 　　   card1.classList.add("matched");
+　　　　　　　　 　　   card2.classList.add("matched");
+
+　　　　　　　　 　　   card1.innerHTML = "";
+　　　　　　　　 　　   card2.innerHTML = "";
+
+　　　　　　　　   　　 firstCard = null;
+　　　　　　　　   　　 secondCard = null;
+ 　　　　　　　　 　　  lock = false;
+
+　　　　　　　　　}, 500);
 
   　　　　　　　  firstCard = null;
  　　　　　　　   secondCard = null;
