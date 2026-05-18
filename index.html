@@ -217,7 +217,7 @@ let secondCard = null;
 let lock = true;
     
 let matched = 0;
-    let discovered = [];
+let discovered = JSON.parse(localStorage.getItem("discovered")) || [];
 
 function updateUI(){
 
@@ -368,10 +368,11 @@ function createStage(){
 
     　　　　　　　　　　　discovered.push(item.name);
 
-    　　　　　　　　　　　localStorage.setItem(
-       　　　　　　　　　　 "discovered",
-     　　　　　　　　　　   JSON.stringify(discovered)
-  　　　　　　　　　　　  );
+    　　　　　　　　　const set = new Set(discovered);  
+　　　　　　　　　　　　set.add(item.name);
+　　　　　　　　　　　　discovered = [...set];
+
+　　　　　　　　　　　　localStorage.setItem("discovered", JSON.stringify(discovered));
 
 　　　　　　　　　　　　}
 
