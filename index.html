@@ -364,9 +364,14 @@ function createStage(){
 
                     score += 100;
 
-                    if(!discovered.includes(item.name)){
+                   if(!discovered.includes(item.name)){
 
-    　　　　　　　　　　　　discovered.push(item.name);
+    　　　　　　　　　　　discovered.push(item.name);
+
+    　　　　　　　　　　　localStorage.setItem(
+       　　　　　　　　　　 "discovered",
+     　　　　　　　　　　   JSON.stringify(discovered)
+  　　　　　　　　　　　  );
 
 　　　　　　　　　　　　}
 
