@@ -207,6 +207,12 @@ const difficulties = {
 
 };
 
+const forcedItems = {
+  beginner: { name:"だしパック「極丸」", image:"kiwamaru" },
+  middle: { name:"たい煮干", image:"tai" },
+  hard: { name:"かつお枯節", image:"katsuo-karebushi" }
+};
+    
 const stages = [
 
   {pairs:6, columns:4, text:true},
@@ -322,10 +328,24 @@ function createStage(){
 
     game.innerHTML = "";
 
-    const items =
-    [...difficulties[selectedDifficulty]]
-    .sort(() => Math.random() - 0.5)
-    .slice(0, stage.pairs);
+    let pool = [...difficulties[selectedDifficulty]]
+  .sort(() => Math.random() - 0.5);
+
+　　let items;
+
+　　if(currentStage === 5){ // ステージ6
+
+    const forced = forcedItems[selectedDifficulty];
+
+    pool = pool.filter(i => i.name !== forced.name);
+
+    items = [forced, forced, ...pool]
+        .slice(0, stage.pairs);
+
+}else{
+
+    items = pool.slice(0, stage.pairs);
+}
 
     const cards =
     [...items, ...items]
