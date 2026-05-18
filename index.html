@@ -379,39 +379,31 @@ function createStage(){
                     firstCard.classList.add("glow");
 　　　　　　　　　　　　secondCard.classList.add("glow");
 
-                    setTimeout(() => {
-   　　　　　　　　　　 firstCard.classList.remove("glow");
- 　　　　　　　　　　   secondCard.classList.remove("glow");
-　　　　　　　　　　　　}, 500);
-                    
-                    firstCard.classList.add("matched");
-                    secondCard.classList.add("matched");
+　　　　　　　　　　　　score += 100;
+　　　　　　　　　　　　matched++;
 
-                    matched++;
+　　　　　　　　　　if(!discovered.includes(item.name)){
+ 　　　　　　　　　　   discovered.push(item.name);
+ 　　　　　　　　　　   const set = new Set(discovered);
+ 　　　　　　　　　　   discovered = [...set];
+ 　　　　　　　　　　   localStorage.setItem("discovered", JSON.stringify(discovered));
+　　　　　　　　　　}
 
-                    score += 100;
+　　　　　　　　　　document.getElementById("message").textContent = "⭕ 正解！";
 
-                   if(!discovered.includes(item.name)){
+　　　　　　　　　　setTimeout(() => {
 
-    　　　　　　　　　　　discovered.push(item.name);
+  　　　　　　　  firstCard.classList.remove("glow");
+ 　　　　　　　   secondCard.classList.remove("glow");
 
-    　　　　　　　　　const set = new Set(discovered);  
-　　　　　　　　　　　　set.add(item.name);
-　　　　　　　　　　　　discovered = [...set];
+ 　　　　　　　   firstCard.classList.add("matched");
+ 　　　　　　　   secondCard.classList.add("matched");
 
-　　　　　　　　　　　　localStorage.setItem("discovered", JSON.stringify(discovered));
+  　　　　　　　  firstCard = null;
+ 　　　　　　　   secondCard = null;
+　　　　　　　    lock = false;
 
-　　　　　　　　　　　　}
-
-                    updateUI();
-
-                    document.getElementById("message").textContent =
-                    "⭕ 正解！";
-
-                    firstCard = null;
-                    secondCard = null;
-
-                    lock = false;
+　　　　　　　　　　}, 500);
 
                     if(matched >= stage.pairs){
 
