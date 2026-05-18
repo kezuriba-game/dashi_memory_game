@@ -5,6 +5,7 @@
 <title>だし神経衰弱</title>
 
 <style>
+
 body{
     font-family:sans-serif;
     background:#f4f1ea;
@@ -26,6 +27,7 @@ h1{
     grid-template-columns:repeat(4,140px);
     gap:12px;
     justify-content:center;
+    margin-top:20px;
 }
 
 .card{
@@ -56,17 +58,18 @@ h1{
     font-size:24px;
     font-weight:bold;
     color:#444;
+    min-height:40px;
 }
 
-#retryButton{
-    margin-top:20px;
-    padding:12px 24px;
-    font-size:18px;
+#startButton{
+    margin:20px auto;
+    padding:14px 28px;
+    font-size:20px;
     border:none;
-    border-radius:10px;
+    border-radius:12px;
     background:#ffb347;
     cursor:pointer;
-    display:none;
+    display:block;
 }
 
 </style>
@@ -82,15 +85,20 @@ h1{
 🏆 スコア: <span id="score">0</span>
 </div>
 
+<div id="message">
+「ゲームスタート」を押して開始！
+</div>
+
+<button id="startButton">
+ゲームスタート
+</button>
+
 <div id="game"></div>
-
-<div id="message"></div>
-
-<button id="retryButton">もう一回！</button>
 
 <script>
 
 const allItems = [
+
   {name:"あご煮干", image:"images/ago.png"},
   {name:"あじ煮干", image:"images/aji.png"},
   {name:"えそ煮干", image:"images/eso.png"},
@@ -105,21 +113,25 @@ const allItems = [
 ];
 
 const game = document.getElementById("game");
-const retryButton = document.getElementById("retryButton");
+const startButton = document.getElementById("startButton");
 
 let firstCard = null;
 let secondCard = null;
-let lock = false;
+let lock = true;
+
 let score = 0;
 let matched = 0;
-let time = 60;
 let stage = 1;
+let time = 60;
+
 let timer;
 
 function updateUI(){
+
     document.getElementById("score").textContent = score;
     document.getElementById("time").textContent = time;
     document.getElementById("stage").textContent = stage;
+
 }
 
 function startTimer(){
@@ -136,29 +148,27 @@ function startTimer(){
 
             clearInterval(timer);
 
-            document.getElementById("message").textContent =
-            "ゲームオーバー！";
-
-            retryButton.style.display = "block";
-
             lock = true;
+
+            document.getElementById("message").textContent =
+            "⏰ ゲームオーバー！";
+
+            startButton.textContent = "もう一回！";
+            startButton.style.display = "block";
         }
 
     },1000);
+
 }
 
-function startStage(){
+function createStage(){
 
     matched = 0;
-
-    game.innerHTML = "";
 
     firstCard = null;
     secondCard = null;
 
-    lock = false;
-
-    retryButton.style.display = "none";
+    game.innerHTML = "";
 
     const shuffled = [...allItems]
     .sort(() => Math.random() - 0.5);
@@ -184,7 +194,8 @@ function startStage(){
 
             if(card.classList.contains("matched")) return;
 
-            card.innerHTML = `<img src="${item.image}">`;
+            card.innerHTML =
+            `<img src="${item.image}">`;
 
             if(!firstCard){
 
@@ -196,6 +207,7 @@ function startStage(){
 
                 lock = true;
 
+                // 正解
                 if(firstCard.dataset.name === secondCard.dataset.name){
 
                     firstCard.classList.add("matched");
@@ -207,29 +219,36 @@ function startStage(){
                     updateUI();
 
                     document.getElementById("message").textContent =
-                    "正解！";
+                    "⭕ 正解！";
 
                     firstCard = null;
                     secondCard = null;
+
                     lock = false;
 
+                    // ステージクリア
                     if(matched >= selected.length){
 
+                        clearInterval(timer);
+
+                        lock = true;
+
                         document.getElementById("message").textContent =
-                        "🎉ステージクリア！🎉";
+                        "🎉 ステージクリア！";
 
                         stage++;
-                        time += 10;
 
-                        setTimeout(() => {
-                            startStage();
-                        },1500);
+                        startButton.textContent =
+                        "次のステージへ";
+
+                        startButton.style.display =
+                        "block";
                     }
 
                 }else{
 
                     document.getElementById("message").textContent =
-                    "ミス！";
+                    "❌ ミス！";
 
                     setTimeout(() => {
 
@@ -242,30 +261,38 @@ function startStage(){
                         lock = false;
 
                     },800);
+
                 }
+
             }
+
         };
 
         game.appendChild(card);
+
     });
 
-    updateUI();
 }
 
-retryButton.onclick = () => {
+startButton.onclick = () => {
 
-    score = 0;
-    stage = 1;
     time = 60;
+
+    updateUI();
+
+    startButton.style.display = "none";
 
     document.getElementById("message").textContent = "";
 
+    lock = false;
+
+    createStage();
+
     startTimer();
-    startStage();
+
 };
 
-startTimer();
-startStage();
+updateUI();
 
 </script>
 
