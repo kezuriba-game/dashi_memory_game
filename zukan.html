@@ -376,18 +376,23 @@ document.getElementById("zukan");
 
 Object.keys(categories).forEach(category => {
 
-    const filtered =
-    items.filter(item =>
-    item.category === category);
+const filtered =
+items.filter(item =>
+item.category === category);
 
-    zukan.innerHTML += `
+const foundCount =
+filtered.filter(item =>
+discovered.includes(item.name)
+).length;
 
-    <h2>
-    ${category}
-    （${filtered.length} / ${categories[category]}）
-    </h2>
+zukan.innerHTML += `
 
-    `;
+<h2>
+${category}
+${foundCount} / ${categories[category]}
+</h2>
+
+`;
    
 　filtered.forEach(item => {
 
