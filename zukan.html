@@ -358,6 +358,11 @@ text:"サンマの荒節。"
 
 ];
 
+const discovered =
+JSON.parse(
+localStorage.getItem("discovered")
+) || [];
+
 const categories = {
 
     "初級":10,
@@ -383,32 +388,47 @@ Object.keys(categories).forEach(category => {
     </h2>
 
     `;
+   
+　filtered.forEach(item => {
 
-    filtered.forEach(item => {
+    const found =
+    discovered.includes(item.name);
 
-        zukan.innerHTML += `
+    zukan.innerHTML += `
 
-        <div class="card">
+    <div class="card">
 
-            <img src="${item.image}">
+        <img src="${
+        found
+        ? item.image
+        : 'images/question.jpg'
+        }">
 
-            <div>
+        <div>
 
-                <div class="name">
-                ${item.name}
-                </div>
+            <div class="name">
+            ${
+            found
+            ? item.name
+            : '？？？'
+            }
+            </div>
 
-                <div class="text">
-                ${item.text}
-                </div>
-
+            <div class="text">
+            ${
+            found
+            ? item.text
+            : 'まだ発見していません'
+            }
             </div>
 
         </div>
 
-        `;
+    </div>
 
-    });
+    `;
+
+　});
 
 });
 
