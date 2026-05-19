@@ -119,11 +119,11 @@ h2{
 
 <body>
 
-<h1>📖 出汁図鑑</h1>
+<h1>出汁図鑑</h1>
 
 <button class="button"
 onclick="location.href='index.html'">
-🎮 ゲームへ戻る
+ゲームへ戻る
 </button>
 
 <div id="zukan"></div>
@@ -375,69 +375,67 @@ const categories = {
 const zukan =
 document.getElementById("zukan");
 
-<h2>
-${categories[category]}
-${foundCount} / ${filtered.length}
-</h2>
+Object.keys(categories).forEach(category => {
 
-const filtered =
-items.filter(item =>
-item.category === category);
+    const filtered =
+    items.filter(item =>
+        item.category === category
+    );
 
-const foundCount =
-filtered.filter(item =>
-discovered.includes(item.name)
-).length;
-
-zukan.innerHTML += `
-
-<h2>
-${category}
-${foundCount} / ${categories[category]}
-</h2>
-
-`;
-   
-　filtered.forEach(item => {
-
-    const found =
-    discovered.includes(item.name);
+    const foundCount =
+    filtered.filter(item =>
+        discovered.includes(item.name)
+    ).length;
 
     zukan.innerHTML += `
 
-    <div class="card">
+    <h2>
+    ${categories[category]}
+    ${foundCount} / ${filtered.length}
+    </h2>
 
-        <img src="${
-        found
-        ? item.image
-        : 'images/question.jpg'
-        }">
+    `;
 
-        <div>
+    filtered.forEach(item => {
 
-            <div class="name">
-            ${
-            found
-            ? item.name
-            : '？？？'
-            }
-            </div>
+        const found =
+        discovered.includes(item.name);
 
-            <div class="text">
-            ${
-            found
-            ? item.text
-            : 'まだ発見していません'
-            }
+        zukan.innerHTML += `
+
+        <div class="card">
+
+            <img src="${
+                found
+                ? item.image
+                : 'images/question.jpg'
+            }">
+
+            <div>
+
+                <div class="name">
+                ${
+                    found
+                    ? item.name
+                    : '？？？'
+                }
+                </div>
+
+                <div class="text">
+                ${
+                    found
+                    ? item.text
+                    : 'まだ発見していません'
+                }
+                </div>
+
             </div>
 
         </div>
 
-    </div>
+        `;
 
-    `;
-
-　});
+    });
 
 });
 
