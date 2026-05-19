@@ -321,27 +321,55 @@ function createStage(){
 if(selectedDifficulty === "beginner"){
 
     pool = items.filter(item =>
-    item.category === "other"
+        item.category === "other"
+        || item.category === "niboshi"
     );
+
+    // 5%でアイテム追加
+    if(Math.random() < 0.05){
+
+        const rareItems =
+        items.filter(item =>
+        item.category === "item"
+        );
+
+        pool.push(...rareItems);
+
+    }
 
 }
 
 else if(selectedDifficulty === "middle"){
 
     pool = items.filter(item =>
-    item.category === "other"
-    || item.category === "niboshi"
+        item.category === "niboshi"
+        || item.category === "fushi"
     );
+
+    // 20%でアイテム追加
+    if(Math.random() < 0.2){
+
+        const rareItems =
+        items.filter(item =>
+        item.category === "item"
+        );
+
+        pool.push(...rareItems);
+
+    }
 
 }
 
 else if(selectedDifficulty === "hard"){
 
     pool = items.filter(item =>
-    item.category !== "item"
+        item.category === "other"
+        || item.category === "niboshi"
+        || item.category === "fushi"
     );
 
-    if(Math.random() < 0.2){
+    // 50%でアイテム追加
+    if(Math.random() < 0.5){
 
         const rareItems =
         items.filter(item =>
