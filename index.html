@@ -438,33 +438,31 @@ if(firstCard.dataset.name === secondCard.dataset.name){
 
     setTimeout(() => {
 
-        card1.classList.remove("glow");
-        card2.classList.remove("glow");
+    card1.classList.remove("glow");
+    card2.classList.remove("glow");
 
-        card1.classList.add("matched");
-        card2.classList.add("matched");
+    card1.classList.add("matched");
+    card2.classList.add("matched");
 
-        lock = false;
+    lock = false;
 
     if(matched >= stage.pairs){
 
-    clearInterval(timer);
+        clearInterval(timer);
 
-    lock = true;
+        lock = true;
 
-    document.getElementById("message").textContent =
-    "🎉 クリア！";
+        document.getElementById("message").textContent =
+        "🎉 クリア！";
 
-    startButton.textContent =
-    "もう一回遊ぶ";
+        startButton.textContent =
+        "もう一回遊ぶ";
 
-    startButton.style.display = "block";
+        startButton.style.display = "block";
 
     }
 
-        }
-
-    },500);
+},500);
 
 
 }else{
