@@ -378,73 +378,81 @@ function createStage(){
 
                 lock = true;
 
-                if(firstCard.dataset.name === secondCard.dataset.name){
+if(firstCard.dataset.name === secondCard.dataset.name){
 
- 　　　　　　　　　   firstCard.classList.add("glow");
-　　　　　　　　　    secondCard.classList.add("glow");
+    firstCard.classList.add("glow");
+    secondCard.classList.add("glow");
 
-　　　　　　　　　    score += 100;
-　　　　　　　　　    matched++;
+    score += 100;
+    matched++;
 
- 　　　　　　　　　   document.getElementById("message").textContent = "⭕ 正解！";
-　
-　　　　　　　 　   const card1 = firstCard;
-　　　　　　　 　   const card2 = secondCard;
-　
-　　　　　　　 　   firstCard = null;
-　　　　　　　 　   secondCard = null;
+    updateUI();
 
-　　　　　　　 　   lock = true;
+    document.getElementById("message").textContent =
+    "⭕ 正解！";
 
- 　　　　　　　　   setTimeout(() => {
+    if(!discovered.includes(item.name)){
 
-  　　　　　　　      card1.classList.remove("glow");
-   　　　　　　　     card2.classList.remove("glow");
+        discovered.push(item.name);
 
-   　　　　　　　     card1.classList.add("matched");
-   　　　　　　　     card2.classList.add("matched");
+        localStorage.setItem(
+            "discovered",
+            JSON.stringify(discovered)
+        );
 
-    　　　　　　    lock = false;
+    }
 
-  　　　　　　　　　  }, 500);
+    const card1 = firstCard;
+    const card2 = secondCard;
 
-   　　　　　　　　　 return; 
-　　　　　　　　　　}
+    firstCard = null;
+    secondCard = null;
 
-                    if(matched >= stage.pairs){
+    setTimeout(() => {
 
-                        clearInterval(timer);
+        card1.classList.remove("glow");
+        card2.classList.remove("glow");
 
-                        lock = true;
+        card1.classList.add("matched");
+        card2.classList.add("matched");
 
-                        if(currentStage >= stages.length - 1){
+        lock = false;
 
-                            document.getElementById("message").textContent =
-                            "🏆 全ステージクリア！";
+        if(matched >= stage.pairs){
 
-                            startButton.textContent =
-                            "最初から遊ぶ";
+            clearInterval(timer);
 
-                            currentStage = 0;
+            lock = true;
 
-                        }else{
+            if(currentStage >= stages.length - 1){
 
-                            document.getElementById("message").textContent =
-                            "🎉 ステージクリア！";
+                document.getElementById("message").textContent =
+                "🏆 全ステージクリア！";
 
-                            currentStage++;
+                startButton.textContent =
+                "最初から遊ぶ";
 
-                            startButton.textContent =
-                            "次のステージへ";
+                currentStage = 0;
 
-                        }
+            }else{
 
-                        startButton.style.display =
-                        "block";
+                document.getElementById("message").textContent =
+                "🎉 ステージクリア！";
 
-                    }
+                currentStage++;
 
-                }else{
+                startButton.textContent =
+                "次のステージへ";
+
+            }
+
+            startButton.style.display = "block";
+
+        }
+
+    },500);
+
+}else{
 
                     document.getElementById("message").textContent =
                     "❌ ミス！";
