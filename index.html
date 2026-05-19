@@ -259,7 +259,6 @@ function selectDifficulty(level){
 
     startButton.style.display = "block";
 
-    currentStage = 0;
     score = 0;
 
     lock = true;
@@ -449,36 +448,19 @@ if(firstCard.dataset.name === secondCard.dataset.name){
 
         if(matched >= stage.pairs){
 
-            clearInterval(timer);
+    clearInterval(timer);
 
-            lock = true;
-
-            document.getElementById("message").textContent =
-"🎉 クリア！";
-
-startButton.textContent =
-"もう一回遊ぶ";
-
-startButton.style.display = "block";
-
-                document.getElementById("message").textContent =
-                "🏆 全ステージクリア！";
-
-                startButton.textContent =
-                "最初から遊ぶ";
-
-                currentStage = 0;
-                
-}else{
+    lock = true;
 
     document.getElementById("message").textContent =
-    "🎉 ステージクリア！";
+    "🎉 クリア！";
 
     startButton.textContent =
     "もう一回遊ぶ";
 
-}
+    startButton.style.display = "block";
 
+}
             startButton.style.display = "block";
 
         }
