@@ -92,14 +92,6 @@ h1{
     gap:10px; 
 }
 
-#stageButtons{
-    margin-top:20px;
-    display:none;
-    justify-content:center;
-    gap:10px;
-    flex-wrap:wrap;
-}
-
 @media screen and (max-width:700px){
 
     .card{
@@ -164,40 +156,6 @@ h1{
     </button>
 </div>
 
-<div id="stageButtons">
-
-    <button class="button"
-    onclick="selectStage(0)">
-    Stage1
-    </button>
-
-    <button class="button"
-    onclick="selectStage(1)">
-    Stage2
-    </button>
-
-    <button class="button"
-    onclick="selectStage(2)">
-    Stage3
-    </button>
-
-    <button class="button"
-    onclick="selectStage(3)">
-    Stage4
-    </button>
-
-    <button class="button"
-    onclick="selectStage(4)">
-    Stage5
-    </button>
-
-    <button class="button"
-    onclick="selectStage(5)">
-    Stage6
-    </button>
-
-</div>
-
 <button id="startButton" class="button" style="display:none;">
 ゲームスタート
 </button>
@@ -213,66 +171,47 @@ h1{
 
 const difficulties = {
 
-  beginner: [
+  const items = [
 
-    {name:"だしパック「極丸」", image:"kiwamaru"},
-    {name:"羅臼昆布", image:"rausukonbu"},
-    {name:"真昆布", image:"makonbu"},
-    {name:"椎茸", image:"shitake"},
-    {name:"イタヤ貝", image:"itayagai"},
-    {name:"むきえび", image:"mukiebi"},
-    {name:"素干えび", image:"suboshiebi"},
-    {name:"いか下足", image:"ikageso"},
-    {name:"ばら海苔", image:"baranori"},
-    {name:"焼き海苔", image:"yakinori"}
+{name:"真昆布", image:"makonbu", category:"other"},
+{name:"羅臼昆布", image:"rausukonbu", category:"other"},
+{name:"椎茸", image:"shitake", category:"other"},
+{name:"イタヤ貝", image:"itayagai", category:"other"},
 
-  ],
+{name:"片口煮干", image:"katakuchi", category:"niboshi"},
+{name:"白口煮干", image:"shirokuchi", category:"niboshi"},
+{name:"平子煮干", image:"hirako", category:"niboshi"},
 
-  middle: [
+{name:"かつお枯節", image:"katsuo-karebushi", category:"fushi"},
+{name:"宗田荒節", image:"souda-arabushi", category:"fushi"},
 
-    {name:"あご煮干", image:"ago"},
-    {name:"あじ煮干", image:"aji"},
-    {name:"えそ煮干", image:"eso"},
-    {name:"平子煮干", image:"hirako"},
-    {name:"いか煮干", image:"ika"},
-    {name:"片口煮干", image:"katakuchi"},
-    {name:"さんま煮干", image:"sanma"},
-    {name:"白口煮干", image:"shirokuchi"},
-    {name:"たい煮干", image:"tai"},
-    {name:"かき煮干", image:"kaki"},
-    {name:"さば煮干", image:"saba"},
-    {name:"うるめ煮干", image:"urume"}
+{name:"金のだし鍋", image:"goldpot", category:"item"}
 
-  ],
-
-  hard: [
-
-    {name:"かつお枯節", image:"katsuo-karebushi"},
-    {name:"かつお荒節", image:"katsuo-arabushi"},
-    {name:"宗田枯節", image:"souda-karebushi"},
-    {name:"宗田荒節", image:"souda-arabushi"},
-    {name:"さば枯節", image:"saba-karebushi"},
-    {name:"さば荒節", image:"saba-arabushi"},
-    {name:"むろあじ節", image:"muroajibushi"},
-    {name:"さんま節", image:"sanmabushi"},
-    {name:"うるめ節", image:"urumebushi"},
-    {name:"平子節", image:"hirakobushi"}
-
-  ]
+];
 
 };
 
-const stages = [
+const settings = {
 
-  {pairs:6, columns:4, text:true},
-  {pairs:8, columns:4, text:true},
-  {pairs:10, columns:4, text:true},
+    beginner:{
+        pairs:6,
+        columns:4,
+        text:true
+    },
 
-  {pairs:6, columns:4, text:false},
-  {pairs:8, columns:4, text:false},
-  {pairs:10, columns:4, text:false}
+    middle:{
+        pairs:8,
+        columns:4,
+        text:true
+    },
 
-];
+    hard:{
+        pairs:10,
+        columns:4,
+        text:false
+    }
+
+};
 
 const game = document.getElementById("game");
 const startButton = document.getElementById("startButton");
@@ -376,7 +315,7 @@ function startTimer(){
 
 function createStage(){
 
-    const stage = stages[currentStage];
+    const stage = settings[selectedDifficulty];
 
     game.style.gridTemplateColumns =
     `repeat(${stage.columns}, auto)`;
@@ -388,14 +327,52 @@ function createStage(){
 
     game.innerHTML = "";
 
-    const items =
-    [...difficulties[selectedDifficulty]]
-    .sort(() => Math.random() - 0.5)
-    .slice(0, stage.pairs);
+    let pool = [];
+
+if(selectedDifficulty === "beginner"){
+
+    pool = items.filter(item =>
+    item.category === "other"
+    );
+
+}
+
+else if(selectedDifficulty === "middle"){
+
+    pool = items.filter(item =>
+    item.category === "other"
+    || item.category === "niboshi"
+    );
+
+}
+
+else if(selectedDifficulty === "hard"){
+
+    pool = items.filter(item =>
+    item.category !== "item"
+    );
+
+    if(Math.random() < 0.2){
+
+        const rareItems =
+        items.filter(item =>
+        item.category === "item"
+        );
+
+        pool.push(...rareItems);
+
+    }
+
+}
+
+const selectedItems =
+[...pool]
+.sort(() => Math.random() - 0.5)
+.slice(0, stage.pairs);
 
     const cards =
-    [...items, ...items]
-    .sort(() => Math.random() - 0.5);
+[...selectedItems, ...selectedItems]
+.sort(() => Math.random() - 0.5);
 
     cards.forEach(item => {
 
