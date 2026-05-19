@@ -142,10 +142,38 @@ h1{
 難易度を選んでね！
 </div>
 
-<div id="difficultyButtons">
-    <button class="button" onclick="selectDifficulty('beginner')">初級</button>
-    <button class="button" onclick="selectDifficulty('middle')">中級</button>
-    <button class="button" onclick="selectDifficulty('hard')">上級</button>
+<div id="stageButtons" style="display:none;">
+
+    <button class="button"
+    onclick="selectStage(0)">
+    Stage1
+    </button>
+
+    <button class="button"
+    onclick="selectStage(1)">
+    Stage2
+    </button>
+
+    <button class="button"
+    onclick="selectStage(2)">
+    Stage3
+    </button>
+
+    <button class="button"
+    onclick="selectStage(3)">
+    Stage4
+    </button>
+
+    <button class="button"
+    onclick="selectStage(4)">
+    Stage5
+    </button>
+
+    <button class="button"
+    onclick="selectStage(5)">
+    Stage6
+    </button>
+
 </div>
 
 <button id="startButton" class="button" style="display:none;">
@@ -288,6 +316,9 @@ function selectDifficulty(level){
     game.innerHTML = "";
 
     updateUI();
+
+document.getElementById("stageButtons")
+.style.display = "flex";
 
 }
 
@@ -442,18 +473,16 @@ if(firstCard.dataset.name === secondCard.dataset.name){
                 "最初から遊ぶ";
 
                 currentStage = 0;
+                
+}else{
 
-            }else{
+    document.getElementById("message").textContent =
+    "🎉 ステージクリア！";
 
-                document.getElementById("message").textContent =
-                "🎉 ステージクリア！";
+    startButton.textContent =
+    "もう一回遊ぶ";
 
-                currentStage++;
-
-                startButton.textContent =
-                "次のステージへ";
-
-            }
+}
 
             startButton.style.display = "block";
 
@@ -492,6 +521,26 @@ if(firstCard.dataset.name === secondCard.dataset.name){
 
 }
 
+function selectStage(stageIndex){
+
+    currentStage = stageIndex;
+
+    time = 60;
+
+    updateUI();
+
+    startButton.textContent =
+    "ゲームスタート";
+
+    startButton.style.display =
+    "block";
+
+    document.getElementById("message")
+    .textContent =
+    `Stage${stageIndex + 1}を開始！`;
+
+}
+    
 startButton.onclick = () => {
 
     if(!selectedDifficulty) return;
