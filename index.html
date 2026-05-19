@@ -152,9 +152,10 @@ h1{
 ゲームスタート
 </button>
 
-<button class="button" onclick="location.href='zukan.html'"> 
+<button class="button" onclick="goToZukan()"> 
 📖 出汁図鑑 
 </button>
+
 
 <div id="game"></div>
 
@@ -504,6 +505,15 @@ startButton.onclick = () => {
 };
 
 updateUI();
+
+function goToZukan(){
+
+    clearInterval(timer);
+
+    location.href = "zukan.html";
+
+}
+
 
 </script>
 
