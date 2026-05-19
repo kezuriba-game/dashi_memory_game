@@ -461,28 +461,30 @@ if(firstCard.dataset.name === secondCard.dataset.name){
 
     },500);
 
+
 }else{
 
-                    document.getElementById("message").textContent =
-                    "❌ ミス！";
+    document.getElementById("message").textContent =
+    "❌ ミス！";
 
-                    setTimeout(() => {
+    setTimeout(() => {
 
-                        firstCard.innerHTML = "";
-                        secondCard.innerHTML = "";
+        firstCard.innerHTML = "";
+        secondCard.innerHTML = "";
 
-                        firstCard = null;
-                        secondCard = null;
+        firstCard = null;
+        secondCard = null;
 
-                        lock = false;
+        lock = false;
 
-                    },1000);
+    },1000);
 
-                }
+}
 
             }
 
         };
+
 
         game.appendChild(card);
 
