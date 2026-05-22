@@ -281,6 +281,7 @@ let lock = true;
     
 let matched = 0;
 let discovered = JSON.parse(localStorage.getItem("discovered")) || [];
+let currentDiscovered = [];
 
 function updateUI(){
 
@@ -367,6 +368,8 @@ function createStage(){
     `repeat(${stage.columns}, auto)`;
 
     matched = 0;
+
+    currentDiscovered = [];
 
     firstCard = null;
     secondCard = null;
@@ -583,16 +586,11 @@ if(firstCard.dataset.name === secondCard.dataset.name){
     document.getElementById("message").textContent =
     "⭕ 正解！";
 
-    if(!discovered.includes(item.name)){
+    if(!currentDiscovered.includes(item.name)){
 
-        discovered.push(item.name);
+    currentDiscovered.push(item.name);
 
-        localStorage.setItem(
-            "discovered",
-            JSON.stringify(discovered)
-        );
-
-    }
+}
 
     const card1 = firstCard;
     const card2 = secondCard;
@@ -616,6 +614,22 @@ if(firstCard.dataset.name === secondCard.dataset.name){
 
         lock = true;
 
+
+currentDiscovered.forEach(name => {
+
+    if(!discovered.includes(name)){
+
+        discovered.push(name);
+
+    }
+
+});
+
+localStorage.setItem(
+    "discovered",
+    JSON.stringify(discovered)
+);
+        
         document.getElementById("message").textContent =
         "🎉 クリア！";
 
