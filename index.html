@@ -470,6 +470,21 @@ if(stage.mixed){
 
     selectedItems.forEach(item => {
 
+    // レアアイテムだけ特殊
+    if(item.category === "item"){
+
+        cards.push({
+            ...item,
+            cardType:"text"
+        });
+
+        cards.push({
+            ...item,
+            cardType:"text"
+        });
+
+    }else{
+
         cards.push({
             ...item,
             cardType:"image"
@@ -480,7 +495,9 @@ if(stage.mixed){
             cardType:"moji"
         });
 
-    });
+    }
+
+});
 
 }else{
 
@@ -513,15 +530,20 @@ cards.sort(() => Math.random() - 0.5);
 
     if(item.cardType === "moji"){
 
-        imagePath =
-        `images/${item.image}-moji.jpg`;
+    imagePath =
+    `images/${item.image}-moji.jpg`;
 
-    }else{
+}else if(item.cardType === "text"){
 
-        imagePath =
-        `images/${item.image}.jpg`;
+    imagePath =
+    `images/${item.image}-text.jpg`;
 
-    }
+}else{
+
+    imagePath =
+    `images/${item.image}.jpg`;
+
+}
 
 }else if(stage.text){
 
