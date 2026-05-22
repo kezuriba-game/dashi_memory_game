@@ -9,32 +9,33 @@
 <style>
 
 body{
+
     font-family:sans-serif;
 
     background:
 
     radial-gradient(
         circle at 20% 20%,
-        rgba(255,255,255,0.65) 0%,
-        rgba(255,255,255,0) 28%
+        rgba(255,255,255,0.7) 0%,
+        rgba(255,255,255,0) 24%
     ),
 
     radial-gradient(
         circle at 80% 30%,
         rgba(255,255,255,0.45) 0%,
-        rgba(255,255,255,0) 24%
+        rgba(255,255,255,0) 22%
     ),
 
     radial-gradient(
-        circle at 40% 80%,
-        rgba(255,255,255,0.28) 0%,
+        circle at 50% 75%,
+        rgba(255,255,255,0.3) 0%,
         rgba(255,255,255,0) 20%
     ),
 
     linear-gradient(
         180deg,
         #f6f0e7 0%,
-        #e8ddcf 100%
+        #e6dac9 100%
     );
 
     min-height:100vh;
@@ -125,7 +126,9 @@ h1{
 
     padding:14px 22px;
 
-    min-width:140px;
+    width:28%;
+    min-width:90px;
+    padding:12px 10px;
 
     backdrop-filter: blur(3px);
 
@@ -152,12 +155,15 @@ h1{
 }
 
 #difficultyButtons{
+
     display:flex;
     justify-content:center;
+    gap:16px;
+
     flex-wrap:wrap;
-    gap:14px;
 
     margin-top:30px;
+    margin-bottom:20px;
 }
 
 @media screen and (max-width:700px){
@@ -169,6 +175,22 @@ h1{
 
     #status{
         font-size:15px;
+    }
+
+    #status{
+    gap:8px;
+    }
+
+    .status-box{
+    border-radius:14px;
+    }
+    
+    .status-title{
+    font-size:11px;
+    }
+    
+    .status-value{
+    font-size:20px;
     }
 
 }
