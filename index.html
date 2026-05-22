@@ -61,6 +61,10 @@ body{
     text-align:center;
     margin:0;
     padding:20px;
+
+    font-family:
+    'Noto Sans JP',
+    sans-serif;
 }
     
 h1{
@@ -121,7 +125,12 @@ h1{
 .card{
     width:110px;
     height:110px;
-    background:#ddd2c3;
+    background:
+        linear-gradient(
+            180deg,
+            #74695f 0%,
+            #5f554d 100%
+        );
     border-radius:16px;
     border:
     1px solid rgba(60,40,30,0.08);
@@ -148,12 +157,15 @@ h1{
 }
 
 #message{
-    margin-top:20px;
-    font-size:22px;
-    font-weight:bold;
+
+    margin-top:28px;
+    font-size:14px;
+    font-weight:400;
+    letter-spacing:0.08em;
+    color:#7f766d;
     min-height:40px;
 }
-
+    
 .button{
 
     border:none;
@@ -302,20 +314,24 @@ h1{
 }
 
 @keyframes glow {
-    0% {
-        box-shadow: 0 0 0px rgba(255, 215, 0, 0);
-        transform: scale(1);
-    }
-    50% {
-        box-shadow: 0 0 20px rgba(255, 215, 0, 0.9);
-        transform: scale(1.05);
-    }
-    100% {
-        box-shadow: 0 0 0px rgba(255, 215, 0, 0);
-        transform: scale(1);
-    }
+
+0%{
+transform:scale(1);
+opacity:0.9;
 }
 
+50%{
+transform:scale(1.02);
+opacity:1;
+}
+
+100%{
+transform:scale(1);
+opacity:0.9;
+}
+
+}
+    
 .card.glow {
     animation: glow 0.5s ease;
 }
@@ -363,19 +379,23 @@ h1{
 </div>
 
 <div id="difficultyButtons">
-    <button class="button" onclick="selectDifficulty('beginner')">
+    <button class="button beginner"
+onclick="selectDifficulty('beginner')">
     初級
     </button>
 
-    <button class="button" onclick="selectDifficulty('middle')">
+    <button class="button middle"
+onclick="selectDifficulty('middle')">
     中級
     </button>
 
-    <button class="button" onclick="selectDifficulty('hard')">
+    <button class="button hard"
+onclick="selectDifficulty('hard')">
     上級
     </button>
 
-    <button class="button" onclick="selectDifficulty('pro')">
+    <button class="button pro"
+onclick="selectDifficulty('pro')">
     達人
     </button>
 </div>
