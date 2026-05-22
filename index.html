@@ -12,38 +12,51 @@ body{
     font-family:sans-serif;
 
     background:
+
     radial-gradient(
         circle at 20% 20%,
-        rgba(255,255,255,0.35) 0%,
-        rgba(255,255,255,0) 25%
+        rgba(255,255,255,0.65) 0%,
+        rgba(255,255,255,0) 28%
     ),
 
     radial-gradient(
         circle at 80% 30%,
-        rgba(255,255,255,0.2) 0%,
+        rgba(255,255,255,0.45) 0%,
+        rgba(255,255,255,0) 24%
+    ),
+
+    radial-gradient(
+        circle at 40% 80%,
+        rgba(255,255,255,0.28) 0%,
         rgba(255,255,255,0) 20%
     ),
 
     linear-gradient(
         180deg,
-        #f7f3ec 0%,
-        #efe7db 100%
+        #f6f0e7 0%,
+        #e8ddcf 100%
     );
+
+    min-height:100vh;
 
     text-align:center;
     margin:0;
     padding:20px;
 }
+    
 h1{
     color:#3a2b24;
 }
 
 #status{
-    margin:15px;
-    font-size:18px;
-    line-height:1.8;
-}
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    flex-wrap:wrap;
 
+    margin:30px auto;
+}
+    
 #game{
     display:grid;
     gap:10px;
@@ -97,17 +110,54 @@ h1{
     display:block;
 }
 
+.status-box{
+
+    background:
+    linear-gradient(
+        180deg,
+        rgba(255,255,255,0.75) 0%,
+        rgba(255,248,240,0.92) 100%
+    );
+
+    border:1px solid #d7c3a7;
+
+    border-radius:18px;
+
+    padding:14px 22px;
+
+    min-width:140px;
+
+    backdrop-filter: blur(3px);
+
+    box-shadow:
+    0 4px 10px rgba(80,60,40,0.08);
+}
+
+.status-title{
+    font-size:13px;
+    color:#7f6446;
+    margin-bottom:8px;
+}
+
+.status-value{
+    font-size:28px;
+    font-weight:bold;
+    color:#3e2d22;
+}
+    
 #startButton{
     background:#7a8e63 !important;
     color:#ffffff !important;
     font-weight:bold; 
 }
 
-#difficultyButtons{ 
-    margin-top:20px; 
-    display:flex; 
-    justify-content:center; 
-    gap:10px; 
+#difficultyButtons{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:14px;
+
+    margin-top:30px;
 }
 
 @media screen and (max-width:700px){
@@ -152,35 +202,20 @@ h1{
 <div id="status">
 
     <div class="status-box">
-        <div class="status-label">
-        難易度
-        </div>
-
-        <div class="status-value"
-        id="difficulty">
-        -
-        </div>
+        <div class="status-title">難易度</div>
+        <div class="status-value" id="difficulty">-</div>
     </div>
 
     <div class="status-box">
-        <div class="status-label">
-        残り時間
-        </div>
-
+        <div class="status-title">残り時間</div>
         <div class="status-value">
-        <span id="time">60</span>秒
+            <span id="time">60</span>秒
         </div>
     </div>
 
     <div class="status-box">
-        <div class="status-label">
-        スコア
-        </div>
-
-        <div class="status-value"
-        id="score">
-        0
-        </div>
+        <div class="status-title">スコア</div>
+        <div class="status-value" id="score">0</div>
     </div>
 
 </div>
