@@ -306,21 +306,28 @@ body{
 @keyframes glow {
 
 0%{
-opacity:0.92;
+transform:scale(1);
+opacity:0.9;
 }
 
 50%{
+transform:scale(1.12);
 opacity:1;
 }
 
 100%{
-opacity:0.92;
+transform:scale(1);
+opacity:0.9;
 }
 
 }
-    
+
 .card.glow {
-    animation: glow 0.5s ease;
+
+    animation: glow 0.45s ease;
+    box-shadow:
+    0 0 0 3px rgba(200,162,77,0.35),
+    0 10px 24px rgba(60,40,30,0.18);
 }
     
 </style>
