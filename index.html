@@ -171,6 +171,10 @@ h1{
     <button class="button" onclick="selectDifficulty('hard')">
     上級
     </button>
+
+    <button class="button" onclick="selectDifficulty('pro')">
+    達人
+    </button>
 </div>
 
 <button id="startButton" class="button" style="display:none;">
@@ -249,6 +253,13 @@ const settings = {
         pairs:10,
         columns:4,
         text:false
+    },
+
+    pro:{
+        pairs:10,
+        columns:4,
+        text:false,
+        mixed:true
     }
 
 };
@@ -291,7 +302,8 @@ function selectDifficulty(level){
     const names = {
         beginner:"初級",
         middle:"中級",
-        hard:"上級"
+        hard:"上級",
+        pro:"達人"
     };
 
     document.getElementById("difficulty").textContent =
@@ -427,14 +439,57 @@ else if(selectedDifficulty === "hard"){
 
 }
 
+else if(selectedDifficulty === "pro"){
+
+    pool = items.filter(item =>
+        item.category === "fushi"
+    );
+
+    // 50%でアイテム追加
+    if(Math.random() < 0.5){
+
+        const rareItems =
+        items.filter(item =>
+            item.category === "item"
+        );
+
+        pool.push(...rareItems);
+
+    }
+
+}
+
 const selectedItems =
 [...pool]
 .sort(() => Math.random() - 0.5)
 .slice(0, stage.pairs);
 
-    const cards =
-[...selectedItems, ...selectedItems]
-.sort(() => Math.random() - 0.5);
+let cards = [];
+
+if(stage.mixed){
+
+    selectedItems.forEach(item => {
+
+        cards.push({
+            ...item,
+            cardType:"image"
+        });
+
+        cards.push({
+            ...item,
+            cardType:"moji"
+        });
+
+    });
+
+}else{
+
+    cards =
+    [...selectedItems, ...selectedItems];
+
+}
+
+cards.sort(() => Math.random() - 0.5);
 
     cards.forEach(item => {
 
@@ -454,17 +509,31 @@ const selectedItems =
 
             let imagePath = "";
 
-            if(stage.text){
+            if(stage.mixed){
 
-                imagePath =
-                `images/${item.image}-text.jpg`;
+    if(item.cardType === "moji"){
 
-            }else{
+        imagePath =
+        `images/${item.image}-moji.jpg`;
 
-                imagePath =
-                `images/${item.image}.jpg`;
+    }else{
 
-            }
+        imagePath =
+        `images/${item.image}.jpg`;
+
+    }
+
+}else if(stage.text){
+
+    imagePath =
+    `images/${item.image}-text.jpg`;
+
+}else{
+
+    imagePath =
+    `images/${item.image}.jpg`;
+
+}
 
             card.innerHTML =
             `<img src="${imagePath}">`;
