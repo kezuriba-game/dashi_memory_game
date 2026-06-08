@@ -182,6 +182,12 @@ h2{
     margin-left:8px;
 }
 
+.unknown{
+
+    filter:grayscale(100%);
+    opacity:0.7;
+}
+    
 @media screen and (max-width:600px){
 
     .card{
@@ -539,7 +545,9 @@ Object.keys(categories).forEach(category => {
 
         <div class="card">
 
-            <img src="${
+            <img
+            class="${found ? '' : 'unknown'}"
+            src="${
                 found
                 ? item.image
                 : 'images/question.jpg'
