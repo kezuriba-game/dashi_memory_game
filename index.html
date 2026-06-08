@@ -28,24 +28,28 @@
     rgba(255,255,255,0.35);
 }
 
+#tipsBar{
+    overflow:hidden;
+}
+
 #tipsText{
 
     display:inline-block;
 
+    padding-left:100%;
+
     animation:
-    slideTip 0.8s ease;
+    marquee 12s linear infinite;
 }
 
-@keyframes slideTip{
+@keyframes marquee{
 
     from{
-        transform:translateX(50px);
-        opacity:0;
+        transform:translateX(0);
     }
 
     to{
-        transform:translateX(0);
-        opacity:1;
+        transform:translateX(-120%);
     }
 
 }
