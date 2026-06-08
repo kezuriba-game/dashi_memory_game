@@ -488,7 +488,8 @@ function showTip(){
     const tip =
     document.getElementById("tipsText");
 
-    tip.style.animation = "none";
+    tip.style.animation =
+    "marquee 18s linear";
 
     tip.textContent =
     tips[tipIndex];
@@ -496,7 +497,7 @@ function showTip(){
     void tip.offsetWidth;
 
     tip.style.animation =
-    "marquee 10s linear";
+    "marquee 18s linear";
 
     tipIndex++;
 
@@ -508,7 +509,7 @@ function showTip(){
 
 showTip();
 
-setInterval(showTip,11000);
+setInterval(showTip,19000);
 
 
 const items = [
