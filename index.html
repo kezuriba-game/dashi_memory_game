@@ -28,28 +28,20 @@
     rgba(255,255,255,0.35);
 }
 
-#tipsBar{
-    overflow:hidden;
-}
-
 #tipsText{
 
     display:inline-block;
-
     padding-left:100%;
-
-    animation:
-    marquee 12s linear infinite;
 }
 
 @keyframes marquee{
 
     from{
-        transform:translateX(0);
+        transform:translateX(100vw);
     }
 
     to{
-        transform:translateX(-120%);
+        transform:translateX(-100%);
     }
 
 }
@@ -491,8 +483,34 @@ const tips = [
 "💡 図鑑で見つけた素材を確認できるよ！"
 ];
 
-document.getElementById("tipsText").textContent =
-tips.join("　　◆　　");
+let tipIndex = 0;
+
+function showTip(){
+
+    const tip =
+    document.getElementById("tipsText");
+
+    tip.style.animation = "none";
+
+    tip.textContent =
+    tips[tipIndex];
+
+    void tip.offsetWidth;
+
+    tip.style.animation =
+    "marquee 10s linear";
+
+    tipIndex++;
+
+    if(tipIndex >= tips.length){
+        tipIndex = 0;
+    }
+
+}
+
+showTip();
+
+setInterval(showTip,11000);
 
 
 const items = [
