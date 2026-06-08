@@ -167,7 +167,7 @@ body{
     background-repeat:no-repeat;
     background-position:center;
     background-size:55px;
-    opacity:0.08;
+    opacity:0.12;
     pointer-events:none;
 }
 
@@ -182,10 +182,6 @@ body{
 
     position:relative;
     z-index:1;
-}
-
-.card::before{
-    background-image:url('images/logo.png');
 }
 
 @keyframes messagePulse{
@@ -487,34 +483,18 @@ onclick="selectDifficulty('pro')">
 <script>
 
 const tips = [
-
 "💡 難易度が高くなるほど、レアアイテムの出現率が高くなるよ！",
 "💡 達人モードは画像と文字のペアをそろえよう！",
 "💡 レアアイテムが出現することも！",
 "💡 上級モードは文字がなくなるよ！画像だけでペアをそろえよう！",
 "💡 ペアをそろえてかつゲームをクリアすると、図鑑に追加されるよ！",
 "💡 図鑑で見つけた素材を確認できるよ！"
-
 ];
 
-let tipIndex = 0;
+document.getElementById("tipsText").textContent =
+tips.join("　　◆　　");
 
-function changeTip(){
 
-    document.getElementById("tipsText").textContent =
-    tips[tipIndex];
-
-    tipIndex++;
-
-    if(tipIndex >= tips.length){
-        tipIndex = 0;
-    }
-
-}
-
-changeTip();
-setInterval(changeTip, 13000);
-    
 const items = [
 
 {name:"真昆布", image:"makonbu", category:"other"},
