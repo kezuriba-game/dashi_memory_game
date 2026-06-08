@@ -179,6 +179,9 @@ body{
     width:100%;
     height:100%;
     object-fit:cover;
+
+    position:relative;
+    z-index:1;
 }
 
 .card::before{
@@ -494,19 +497,23 @@ const tips = [
 
 ];
 
+let tipIndex = 0;
+
 function changeTip(){
 
-    const randomTip =
-    tips[Math.floor(Math.random() * tips.length)];
-
     document.getElementById("tipsText").textContent =
-    randomTip;
+    tips[tipIndex];
+
+    tipIndex++;
+
+    if(tipIndex >= tips.length){
+        tipIndex = 0;
+    }
 
 }
 
 changeTip();
-
-setInterval(changeTip, 18000);
+setInterval(changeTip, 13000);
     
 const items = [
 
