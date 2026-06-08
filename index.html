@@ -485,31 +485,28 @@ let tipIndex = 0;
 
 function showTip(){
 
-    const tip =
-    document.getElementById("tipsText");
+const tip =
+document.getElementById("tipsText");
 
-    tip.style.animation =
-    "marquee 18s linear";
+tip.style.animation = "none";
 
-    tip.textContent =
-    tips[tipIndex];
+tip.textContent =
+tips[tipIndex];
 
-    void tip.offsetWidth;
+void tip.offsetWidth;
 
-    tip.style.animation =
-    "marquee 18s linear";
+tip.style.animation =
+"marquee 10s linear";
 
-    tipIndex++;
-
-    if(tipIndex >= tips.length){
-        tipIndex = 0;
-    }
+tipIndex =
+(tipIndex + 1) % tips.length;
 
 }
 
 showTip();
 
-setInterval(showTip,19000);
+document.getElementById("tipsText")
+.addEventListener("animationend", showTip);
 
 
 const items = [
