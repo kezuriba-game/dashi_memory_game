@@ -392,6 +392,35 @@ opacity:0.9;
     0 0 0 3px rgba(200,162,77,0.35),
     0 10px 24px rgba(60,40,30,0.18);
 }
+
+#resultModal{
+
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,0.5);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index:9999;
+}
+
+.modal-content{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    width:85%;
+    max-width:350px;
+
+    text-align:center;
+}
+    
     
 </style>
 </head>
@@ -959,6 +988,8 @@ localStorage.setItem(
         document.getElementById("message").textContent =
         "🎉 クリア！";
 
+        showResultModal();
+
         startButton.textContent =
         "もう一回遊ぶ";
 
@@ -1030,8 +1061,70 @@ function goToZukan(){
 
 }
 
+function showResultModal(){
 
+    document.getElementById("resultModal")
+    .style.display = "flex";
+
+    document.getElementById("resultText")
+    .innerHTML = `
+    難易度：${document.getElementById("difficulty").textContent}<br>
+    スコア：${score}点<br>
+    残り時間：${time}秒
+    `;
+
+}
+
+function closeModal(){
+
+    document.getElementById("resultModal")
+    .style.display = "none";
+
+}
+
+function shareResult(){
+
+const difficulty =
+document.getElementById("difficulty").textContent;
+
+const text =
+`だし神経衰弱をクリア！
+
+難易度：${difficulty}
+スコア：${score}点
+残り時間：${time}秒
+
+#だし神経衰弱`;
+
+window.open(
+`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`,
+"_blank"
+);
+
+}
+    
+    
 </script>
 
+<div id="resultModal" style="display:none;">
+
+    <div class="modal-content">
+
+        <h2>🎉 クリア！</h2>
+
+        <p id="resultText"></p>
+
+        <button onclick="shareResult()">
+            結果をシェア
+        </button>
+
+        <button onclick="closeModal()">
+            閉じる
+        </button>
+
+    </div>
+
+</div>
+    
 </body>
 </html>
