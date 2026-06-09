@@ -667,6 +667,8 @@ let matched = 0;
 let discovered = JSON.parse(localStorage.getItem("discovered")) || [];
 let currentDiscovered = [];
 
+let gameOver = false;
+
 function updateUI(){
 
     document.getElementById("score").textContent = score;
@@ -726,9 +728,9 @@ function startTimer(){
         updateUI();
 
         if(time <= 0){
-
+            
             clearInterval(timer);
-
+            gameOver = true;
             lock = true;
 
             document.getElementById("message").textContent =
@@ -832,8 +834,8 @@ else if(selectedDifficulty === "pro"){
         item.category === "fushi"
     );
 
-    // 30%でアイテム追加
-    if(Math.random() < 0.3){
+    // 25%でアイテム追加
+    if(Math.random() < 0.25){
 
         const rareItems =
         items.filter(item =>
@@ -989,8 +991,10 @@ if(firstCard.dataset.name === secondCard.dataset.name){
 
     card1.classList.add("matched");
     card2.classList.add("matched");
-
-    lock = false;
+        
+    if(!gameOver){
+        lock = false;
+    }
 
     if(matched >= stage.pairs){
 
@@ -1041,8 +1045,10 @@ localStorage.setItem(
 
         firstCard = null;
         secondCard = null;
-
-        lock = false;
+        
+        if(!gameOver){
+            lock = false;
+        }
 
     },1000);
 
@@ -1063,7 +1069,7 @@ localStorage.setItem(
 startButton.onclick = () => {
 
     if(!selectedDifficulty) return;
-
+    gameOver = false;
     time = 60;
 
     updateUI();
