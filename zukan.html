@@ -115,6 +115,21 @@ h2{
     display:block;
 }
 
+.infoButton{
+
+    display:block;
+
+    background:#7a8e63;
+    color:white;
+
+    text-decoration:none;
+
+    padding:12px;
+    margin-top:10px;
+
+    border-radius:12px;
+}
+
 #zukan{
     display:flex;
     flex-direction:column;
@@ -477,9 +492,17 @@ text:"削りたての鰹節は格別！"
 category:"item",
 name:"鰹出汁の冷やしラーメン",
 image:"images/ramen.jpg",
-text:"山形名物冷やしラーメンを鰹出汁で。"
-},
+text:`
+山形名物冷やしラーメンを鰹出汁で。
 
+<a href="https://〇〇.com/recipe"
+   target="_blank"
+   class="infoButton">
+🍳 レシピを見る
+</a>
+`
+}
+    
 {
 category:"item",
 name:"鰹出汁がしみたおでん",
