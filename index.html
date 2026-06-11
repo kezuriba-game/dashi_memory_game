@@ -819,6 +819,8 @@ function createStage(){
 
     let pool = [];
 
+    let rareAppeared = false;
+
 if(selectedDifficulty === "beginner"){
 
     pool = items.filter(item =>
@@ -889,15 +891,18 @@ if(selectedDifficulty === "beginner"){
     .slice(0, stage.pairs);
 
     if(Math.random() < 0.05){
-        selectedItems.pop();
-        selectedItems.push(
-            rareItems[
-                Math.floor(
-                    Math.random()*rareItems.length
-                )
-            ]
-        );
-    }
+
+    rareAppeared = true;
+
+    selectedItems.pop();
+    selectedItems.push(
+        rareItems[
+            Math.floor(
+                Math.random()*rareItems.length
+            )
+        ]
+    );
+}
 
 }
 
@@ -910,15 +915,18 @@ else if(selectedDifficulty === "middle"){
     .slice(0, stage.pairs);
 
     if(Math.random() < 0.10){
-        selectedItems.pop();
-        selectedItems.push(
-            rareItems[
-                Math.floor(
-                    Math.random()*rareItems.length
-                )
-            ]
-        );
-    }
+
+    rareAppeared = true;
+
+    selectedItems.pop();
+    selectedItems.push(
+        rareItems[
+            Math.floor(
+                Math.random()*rareItems.length
+            )
+        ]
+    );
+}
 
 }
 
@@ -931,20 +939,24 @@ else if(selectedDifficulty === "hard"){
     .slice(0, stage.pairs);
 
     if(Math.random() < 0.15){
-        selectedItems.pop();
-        selectedItems.push(
-            rareItems[
-                Math.floor(
-                    Math.random()*rareItems.length
-                )
-            ]
-        );
-    }
 
+    rareAppeared = true;
+
+    selectedItems.pop();
+    selectedItems.push(
+        rareItems[
+            Math.floor(
+                Math.random()*rareItems.length
+            )
+        ]
+    );
+}
 }
 
 // 達人
 else if(selectedDifficulty === "pro"){
+
+    rareAppeared = true;
 
     selectedItems =
     [...pool]
@@ -963,6 +975,8 @@ else if(selectedDifficulty === "pro"){
 
 // 名人
 else if(selectedDifficulty === "master"){
+
+    rareAppeared = true;
 
     selectedItems =
     [...pool]
@@ -1198,6 +1212,26 @@ localStorage.setItem(
         game.appendChild(card);
 
     });
+
+if(rareAppeared){
+
+    document.getElementById("message").textContent =
+    "✨レアアイテム出現！";
+
+    document.getElementById("message").style.color =
+    "#c8a24d";
+
+    setTimeout(() => {
+
+        document.getElementById("message").textContent =
+        "";
+
+        document.getElementById("message").style.color =
+        "#7a8e63";
+
+    },2500);
+
+}
 
 }
 
