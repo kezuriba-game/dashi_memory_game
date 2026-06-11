@@ -279,14 +279,15 @@ body{
 
 #difficultyButtons .button{
 
-    width:68px;
-    height:68px;
+    width:76px;
+    height:76px;
 
-    border-radius:18px;
+    border-radius:20px;
 
-    font-size:13px;
+    font-size:14px;
+    font-weight:600;
 }
-
+    
 .beginner{
     background:#efe7d8;
     color:#4b413c;
@@ -298,41 +299,60 @@ body{
 }
 
 .hard{
-    background:#5c4a42;
+    background:
+    linear-gradient(
+        180deg,
+        #9a7a3d,
+        #7b5e2d
+    );
     color:#fffdf8;
 }
 
 .pro{
-    background:#3b312b;
-    color:#fffdf8;
+    background:
+    linear-gradient(
+        180deg,
+        #6f5848,
+        #4e3d31
+    );
+    color:white;
+    border:3px solid #c8a24d;
+    box-shadow:
+    0 3px 10px rgba(200,162,77,0.2);
 }
 
 .master{
-    background:#2f2520;
+    background:
+    linear-gradient(
+        180deg,
+        #4c3a2f,
+        #2f2520
+    );
     color:white;
-    border:2px solid #c8a24d;
+    border:4px solid #d8b45b;
+    box-shadow:
+    0 4px 14px rgba(216,180,91,0.35);
 }
 
 .challenge{
     width:200px;
     background:
     linear-gradient(
-        90deg,
-        #7a1f1f,
-        #9e2f2f
+        180deg,
+        #8a2a2a,
+        #611818
     );
     color:white;
-    border:2px solid #c8a24d;
-    box-shadow:
-    0 6px 16px rgba(122,31,31,0.25);
+    border:none;
     border-radius:18px;
-    padding:12px;
+    padding:14px;
     margin:0 auto 20px auto;
     display:block;
-    font-weight:bold;
-    letter-spacing:0.2em;
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:0.15em;
 }
-
+    
 #zukanButton{
 
     background:
