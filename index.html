@@ -279,12 +279,12 @@ body{
 
 #difficultyButtons .button{
 
-    width:72px;
-    height:72px;
+    width:68px;
+    height:68px;
 
     border-radius:18px;
 
-    font-size:14px;
+    font-size:13px;
 }
 
 .beginner{
@@ -314,16 +314,23 @@ body{
 }
 
 .challenge{
-    width:180px;
-    background:#7a1f1f;
+    width:200px;
+    background:
+    linear-gradient(
+        90deg,
+        #7a1f1f,
+        #9e2f2f
+    );
     color:white;
     border:2px solid #c8a24d;
+    box-shadow:
+    0 6px 16px rgba(122,31,31,0.25);
     border-radius:18px;
     padding:12px;
     margin:0 auto 20px auto;
     display:block;
     font-weight:bold;
-    letter-spacing:0.1em;
+    letter-spacing:0.2em;
 }
 
 #zukanButton{
@@ -515,19 +522,38 @@ opacity:0.9;
 
 <div id="difficultyButtons">
 
-    <button class="button beginner">初級</button>
-    <button class="button middle">中級</button>
-    <button class="button hard">上級</button>
-    <button class="button pro">達人</button>
-    <button class="button master">名人</button>
+    <button class="button beginner"
+    onclick="selectDifficulty('beginner')">
+    初級
+    </button>
+
+    <button class="button middle"
+    onclick="selectDifficulty('middle')">
+    中級
+    </button>
+
+    <button class="button hard"
+    onclick="selectDifficulty('hard')">
+    上級
+    </button>
+
+    <button class="button pro"
+    onclick="selectDifficulty('pro')">
+    達人
+    </button>
+
+    <button class="button master"
+    onclick="selectDifficulty('master')">
+    名人
+    </button>
 
 </div>
-
-<button
-class="challenge"
-onclick="selectDifficulty('challenge')">
-⚔ 試練
-</button>
+    
+    <button
+    class="challenge"
+    onclick="selectDifficulty('challenge')">
+    ⚔ 試練
+    </button>
 
 <button id="startButton" class="button" style="display:none;">
 ゲームスタート
