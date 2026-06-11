@@ -825,16 +825,6 @@ if(selectedDifficulty === "beginner"){
         || item.category === "niboshi"
     );
 
-    // 5%でアイテム追加
-    if(Math.random() < 0.05){
-
-        pool.push(
-            ...items.filter(item =>
-                item.category === "item"
-            )
-        );
-    }
-
 }
 
 else if(selectedDifficulty === "middle"){
@@ -843,16 +833,6 @@ else if(selectedDifficulty === "middle"){
         item.category === "fushi"
         || item.category === "usukezuri"
     );
-
-    // 10%でアイテム追加
-    if(Math.random() < 0.10){
-
-        pool.push(
-            ...items.filter(item =>
-                item.category === "item"
-            )
-        );
-    }
 
 }
 
@@ -863,16 +843,6 @@ else if(selectedDifficulty === "hard"){
         || item.category === "kona"
     );
 
-    // 15%でアイテム追加
-    if(Math.random() < 0.15){
-
-        pool.push(
-            ...items.filter(item =>
-                item.category === "item"
-            )
-        );
-    }
-
 }
 
 else if(selectedDifficulty === "pro"){
@@ -881,16 +851,6 @@ else if(selectedDifficulty === "pro"){
         item.category !== "item"
     );
 
-    // 25%でアイテム追加
-    if(Math.random() < 0.25){
-
-        pool.push(
-            ...items.filter(item =>
-                item.category === "item"
-            )
-        );
-    }
-
 }
 
 else if(selectedDifficulty === "master"){
@@ -898,16 +858,6 @@ else if(selectedDifficulty === "master"){
     pool = items.filter(item =>
         item.category !== "item"
     );
-
-    // 35%でアイテム追加
-    if(Math.random() < 0.35){
-
-        pool.push(
-            ...items.filter(item =>
-                item.category === "item"
-            )
-        );
-    }
 
 }
 
@@ -922,10 +872,121 @@ else if(selectedDifficulty === "challenge"){
 
 }
 
-const selectedItems =
-[...pool]
-.sort(() => Math.random() - 0.5)
-.slice(0, stage.pairs);
+const rareItems =
+items.filter(item =>
+    item.category === "item"
+);
+
+let selectedItems = [];
+
+// 初級
+if(selectedDifficulty === "beginner"){
+
+    selectedItems =
+    [...pool]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, stage.pairs);
+
+    if(Math.random() < 0.05){
+        selectedItems.pop();
+        selectedItems.push(
+            rareItems[
+                Math.floor(
+                    Math.random()*rareItems.length
+                )
+            ]
+        );
+    }
+
+}
+
+// 中級
+else if(selectedDifficulty === "middle"){
+
+    selectedItems =
+    [...pool]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, stage.pairs);
+
+    if(Math.random() < 0.10){
+        selectedItems.pop();
+        selectedItems.push(
+            rareItems[
+                Math.floor(
+                    Math.random()*rareItems.length
+                )
+            ]
+        );
+    }
+
+}
+
+// 上級
+else if(selectedDifficulty === "hard"){
+
+    selectedItems =
+    [...pool]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, stage.pairs);
+
+    if(Math.random() < 0.15){
+        selectedItems.pop();
+        selectedItems.push(
+            rareItems[
+                Math.floor(
+                    Math.random()*rareItems.length
+                )
+            ]
+        );
+    }
+
+}
+
+// 達人
+else if(selectedDifficulty === "pro"){
+
+    selectedItems =
+    [...pool]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, stage.pairs - 1);
+
+    selectedItems.push(
+        rareItems[
+            Math.floor(
+                Math.random()*rareItems.length
+            )
+        ]
+    );
+
+}
+
+// 名人
+else if(selectedDifficulty === "master"){
+
+    selectedItems =
+    [...pool]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, stage.pairs - 2);
+
+    const shuffledRare =
+    [...rareItems]
+    .sort(() => Math.random() - 0.5);
+
+    selectedItems.push(shuffledRare[0]);
+    selectedItems.push(shuffledRare[1]);
+
+}
+
+// 試練
+else{
+
+    selectedItems =
+    [...pool]
+    .sort(() => Math.random() - 0.5)
+    .slice(0, stage.pairs);
+
+}
+    
 
 let cards = [];
 
