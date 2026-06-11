@@ -30,12 +30,16 @@
 
 #tipsText{
     display:inline-block;
-}
+    white-space:nowrap;
 
+    animation:
+    marquee 30s linear infinite;
+}
+    
 @keyframes marquee{
 
     from{
-        transform:translateX(100vw);
+        transform:translateX(100%);
     }
 
     to{
@@ -576,6 +580,9 @@ const tips = [
 "💡 ペアをそろえてかつゲームをクリアすると、図鑑に追加されるよ！",
 "💡 図鑑で見つけた素材を確認できるよ！"
 ];
+
+document.getElementById("tipsText").textContent =
+tips.concat(tips).join("　　　　　　　");
 
 let tipIndex = 0;
 
