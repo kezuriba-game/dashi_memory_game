@@ -33,7 +33,7 @@
     white-space:nowrap;
 
     animation:
-    marquee 30s linear infinite;
+    marquee 28s linear infinite;
 }
     
 @keyframes marquee{
@@ -582,43 +582,9 @@ const tips = [
 ];
 
 document.getElementById("tipsText").textContent =
-tips.concat(tips).join("　　　　　　　");
+tips.join("　　　　　");
 
-let tipIndex = 0;
-
-function showTip(){
-
-    const tip =
-    document.getElementById("tipsText");
-
-    tip.style.animation = "none";
-
-    tip.textContent =
-    tips[tipIndex];
-
-    void tip.offsetWidth;
-
-    tip.style.animation =
-    "marquee 18s linear";
-
-    tipIndex++;
-
-    if(tipIndex >= tips.length){
-        tipIndex = 0;
-    }
-
-}
-
-showTip();
-
-document
-.getElementById("tipsText")
-.addEventListener(
-    "animationend",
-    showTip
-);
-
-
+    
 const items = [
 
 {name:"真昆布", image:"makonbu", category:"other"},
