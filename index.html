@@ -32,7 +32,7 @@
     display:inline-block;
     white-space:nowrap;
     padding-left:100%;
-    animation:marquee 60s linear infinite;
+    animation:marquee 80s linear infinite;
 }
 
 @keyframes marquee{
@@ -731,8 +731,9 @@ function updateUI(){
 function selectDifficulty(level){
 
     clearInterval(timer);
-
-    time = 60; 
+    
+    time =
+    settings[level].time || 60;
     
     updateUI();
     
