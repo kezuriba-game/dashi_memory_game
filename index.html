@@ -31,15 +31,14 @@
 #tipsText{
     display:inline-block;
     white-space:nowrap;
-
-    animation:
-    marquee 28s linear infinite;
+    padding-left:100%;
+    animation:marquee 32s linear infinite;
 }
-    
+
 @keyframes marquee{
 
     from{
-        transform:translateX(100%);
+        transform:translateX(0);
     }
 
     to{
@@ -47,7 +46,7 @@
     }
 
 }
-
+    
 body{
 
     background-color:#f6f1e7;
@@ -582,7 +581,8 @@ const tips = [
 ];
 
 document.getElementById("tipsText").textContent =
-tips.join("　　　　　");
+tips.join("　　　　　　　　") + "　　　　　　　　" +
+tips.join("　　　　　　　　");
 
     
 const items = [
