@@ -266,11 +266,12 @@ body{
 
     display:flex;
     justify-content:center;
-    gap:8px;
+    gap:6px;
     flex-wrap:nowrap;
+
     margin-top:30px;
-    margin-bottom:26px;
-    width:100%;
+    margin-bottom:12px;
+
     max-width:420px;
     margin-left:auto;
     margin-right:auto;
@@ -278,14 +279,12 @@ body{
 
 #difficultyButtons .button{
 
-    width:88px;
-    height:88px;
+    width:72px;
+    height:72px;
 
-    border-radius:22px;
+    border-radius:18px;
 
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    font-size:14px;
 }
 
 .beginner{
@@ -306,6 +305,25 @@ body{
 .pro{
     background:#3b312b;
     color:#fffdf8;
+}
+
+.master{
+    background:#2f2520;
+    color:white;
+    border:2px solid #c8a24d;
+}
+
+.challenge{
+    width:180px;
+    background:#7a1f1f;
+    color:white;
+    border:2px solid #c8a24d;
+    border-radius:18px;
+    padding:12px;
+    margin:0 auto 20px auto;
+    display:block;
+    font-weight:bold;
+    letter-spacing:0.1em;
 }
 
 #zukanButton{
@@ -496,35 +514,19 @@ opacity:0.9;
 </div>
 
 <div id="difficultyButtons">
-    <button class="button beginner"
-onclick="selectDifficulty('beginner')">
-    初級
-    </button>
 
-    <button class="button middle"
-onclick="selectDifficulty('middle')">
-    中級
-    </button>
+    <button class="button beginner">初級</button>
+    <button class="button middle">中級</button>
+    <button class="button hard">上級</button>
+    <button class="button pro">達人</button>
+    <button class="button master">名人</button>
 
-    <button class="button hard"
-onclick="selectDifficulty('hard')">
-    上級
-    </button>
-
-    <button class="button pro"
-onclick="selectDifficulty('pro')">
-    達人
-    </button>
 </div>
 
-<button class="button pro"
-onclick="selectDifficulty('master')">
-    名人
-</button>
-
-<button class="button pro"
+<button
+class="challenge"
 onclick="selectDifficulty('challenge')">
-    試練
+⚔ 試練
 </button>
 
 <button id="startButton" class="button" style="display:none;">
@@ -684,10 +686,9 @@ const settings = {
     },
 
     master:{
-        pairs:10,
-        columns:4,
-        text:false,
-        mixed:true
+    pairs:10,
+    columns:4,
+    mixed:true
     },
 
     challenge:{
