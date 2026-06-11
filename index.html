@@ -517,6 +517,16 @@ onclick="selectDifficulty('pro')">
     </button>
 </div>
 
+<button class="button pro"
+onclick="selectDifficulty('master')">
+    名人
+</button>
+
+<button class="button pro"
+onclick="selectDifficulty('challenge')">
+    試練
+</button>
+
 <button id="startButton" class="button" style="display:none;">
 ゲームスタート
 </button>
@@ -648,7 +658,7 @@ const items = [
 const settings = {
 
     beginner:{
-        pairs:6,
+        pairs:8,
         columns:4,
         text:true
     },
@@ -662,14 +672,28 @@ const settings = {
     hard:{
         pairs:10,
         columns:4,
-        text:false
+        text:true
     },
 
     pro:{
         pairs:10,
         columns:4,
+        text:false
+    },
+
+    master:{
+        pairs:10,
+        columns:4,
         text:false,
         mixed:true
+    },
+
+    challenge:{
+        pairs:10,
+        columns:4,
+        text:false,
+        mixed:true,
+        time:40
     }
 
 };
@@ -713,10 +737,12 @@ function selectDifficulty(level){
     selectedDifficulty = level;
 
     const names = {
-        beginner:"初級",
-        middle:"中級",
-        hard:"上級",
-        pro:"達人"
+    beginner:"初級",
+    middle:"中級",
+    hard:"上級",
+    pro:"達人",
+    master:"名人",
+    challenge:"試練"
     };
 
     document.getElementById("difficulty").textContent =
@@ -800,13 +826,11 @@ if(selectedDifficulty === "beginner"){
     // 5%でアイテム追加
     if(Math.random() < 0.05){
 
-        const rareItems =
-        items.filter(item =>
-        item.category === "item"
+        pool.push(
+            ...items.filter(item =>
+                item.category === "item"
+            )
         );
-
-        pool.push(...rareItems);
-
     }
 
 }
@@ -814,20 +838,18 @@ if(selectedDifficulty === "beginner"){
 else if(selectedDifficulty === "middle"){
 
     pool = items.filter(item =>
-        item.category === "niboshi"
-        || item.category === "fushi"
+        item.category === "fushi"
+        || item.category === "usukezuri"
     );
 
     // 10%でアイテム追加
-    if(Math.random() < 0.1){
+    if(Math.random() < 0.10){
 
-        const rareItems =
-        items.filter(item =>
-        item.category === "item"
+        pool.push(
+            ...items.filter(item =>
+                item.category === "item"
+            )
         );
-
-        pool.push(...rareItems);
-
     }
 
 }
@@ -835,21 +857,18 @@ else if(selectedDifficulty === "middle"){
 else if(selectedDifficulty === "hard"){
 
     pool = items.filter(item =>
-        item.category === "other"
-        || item.category === "niboshi"
-        || item.category === "fushi"
+        item.category === "atsukezuri"
+        || item.category === "kona"
     );
 
     // 15%でアイテム追加
     if(Math.random() < 0.15){
 
-        const rareItems =
-        items.filter(item =>
-        item.category === "item"
+        pool.push(
+            ...items.filter(item =>
+                item.category === "item"
+            )
         );
-
-        pool.push(...rareItems);
-
     }
 
 }
@@ -857,20 +876,47 @@ else if(selectedDifficulty === "hard"){
 else if(selectedDifficulty === "pro"){
 
     pool = items.filter(item =>
-        item.category === "fushi"
+        item.category !== "item"
     );
 
     // 25%でアイテム追加
     if(Math.random() < 0.25){
 
-        const rareItems =
-        items.filter(item =>
-            item.category === "item"
+        pool.push(
+            ...items.filter(item =>
+                item.category === "item"
+            )
         );
-
-        pool.push(...rareItems);
-
     }
+
+}
+
+else if(selectedDifficulty === "master"){
+
+    pool = items.filter(item =>
+        item.category !== "item"
+    );
+
+    // 35%でアイテム追加
+    if(Math.random() < 0.35){
+
+        pool.push(
+            ...items.filter(item =>
+                item.category === "item"
+            )
+        );
+    }
+
+}
+
+else if(selectedDifficulty === "challenge"){
+
+    pool = items.filter(item =>
+        item.category === "fushi"
+        || item.category === "usukezuri"
+        || item.category === "atsukezuri"
+        || item.category === "kona"
+    );
 
 }
 
@@ -1096,7 +1142,8 @@ startButton.onclick = () => {
 
     if(!selectedDifficulty) return;
     gameOver = false;
-    time = 60;
+    time =
+    settings[selectedDifficulty].time || 60;
 
     updateUI();
 
