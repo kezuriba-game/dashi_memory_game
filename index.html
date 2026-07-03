@@ -1293,7 +1293,9 @@ if(rareAppeared){
 startButton.onclick = () => {
 
     if(!selectedDifficulty) return;
+
     gameOver = false;
+
     time =
     settings[selectedDifficulty].time || 60;
 
@@ -1303,7 +1305,8 @@ startButton.onclick = () => {
 
     startButton.style.display = "none";
 
-    document.getElementById("message").textContent = "";
+    document.getElementById("message").textContent =
+    "カードをタップしてね！";
 
     createStage();
 
