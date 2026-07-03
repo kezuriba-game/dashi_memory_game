@@ -316,8 +316,7 @@ body{
 }
 
 .challenge{
-    width:82%;
-    max-width:420px;
+    width:100%;
     background:#7a1f1f;
     color:white;
     border:none;
@@ -330,6 +329,11 @@ body{
     letter-spacing:0.15em;
     box-shadow:
     0 4px 14px rgba(122,31,31,0.25);
+}
+
+.challengeWrap{
+    max-width:420px;
+    margin:0 auto 20px auto;
 }
 
 .selectedDifficulty{
@@ -554,12 +558,16 @@ opacity:0.9;
 
 </div>
     
+    <div class="challengeWrap">
+
     <button
-        id="challengeBtn"
-        class="challenge"
-        onclick="selectDifficulty('challenge')">
-        五十嵐鰹節からの挑戦
+    id="challengeBtn"
+    class="challenge"
+    onclick="selectDifficulty('challenge')">
+    五十嵐鰹節からの挑戦
     </button>
+    
+    </div>
 
 <button id="startButton" class="button" style="display:none;">
 ゲームスタート
