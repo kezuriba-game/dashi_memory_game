@@ -316,7 +316,8 @@ body{
 }
 
 .challenge{
-    width:200px;
+    width:82%;
+    max-width:420px;
     background:#7a1f1f;
     color:white;
     border:none;
@@ -521,37 +522,43 @@ opacity:0.9;
 
 <div id="difficultyButtons">
 
-    <button class="button beginner"
-    onclick="selectDifficulty('beginner')">
-    初級
+    <button id="beginnerBtn"
+        class="button beginner"
+        onclick="selectDifficulty('beginner')">
+        初級
     </button>
-
-    <button class="button middle"
-    onclick="selectDifficulty('middle')">
-    中級
+    
+    <button id="middleBtn"
+        class="button middle"
+        onclick="selectDifficulty('middle')">
+        中級
     </button>
-
-    <button class="button hard"
-    onclick="selectDifficulty('hard')">
-    上級
+    
+    <button id="hardBtn"
+        class="button hard"
+        onclick="selectDifficulty('hard')">
+        上級
     </button>
-
-    <button class="button pro"
-    onclick="selectDifficulty('pro')">
-    達人
+    
+    <button id="proBtn"
+        class="button pro"
+        onclick="selectDifficulty('pro')">
+        達人
     </button>
-
-    <button class="button master"
-    onclick="selectDifficulty('master')">
-    名人
+    
+    <button id="masterBtn"
+        class="button master"
+        onclick="selectDifficulty('master')">
+        名人
     </button>
 
 </div>
     
     <button
-    class="challenge"
-    onclick="selectDifficulty('challenge')">
-    ⚔ 試練
+        id="challengeBtn"
+        class="challenge"
+        onclick="selectDifficulty('challenge')">
+        五十嵐鰹節からの挑戦
     </button>
 
 <button id="startButton" class="button" style="display:none;">
@@ -669,7 +676,7 @@ const settings = {
     },
 
     hard:{
-        pairs:10,
+        pairs:8,
         columns:4,
         text:true
     },
@@ -732,6 +739,29 @@ function selectDifficulty(level){
     updateUI();
     
     selectedDifficulty = level;
+
+    document
+    .querySelectorAll(
+    "#difficultyButtons button, .challenge"
+    )
+    .forEach(btn =>
+    btn.classList.remove("selectedDifficulty")
+    );
+
+    const buttonMap = {
+        
+    beginner:"beginnerBtn",
+    middle:"middleBtn",
+    hard:"hardBtn",
+    pro:"proBtn",
+    master:"masterBtn",
+    challenge:"challengeBtn"
+    
+    };
+    
+    document
+    .getElementById(buttonMap[level])
+    .classList.add("selectedDifficulty");
 
     const names = {
     beginner:"初級",
