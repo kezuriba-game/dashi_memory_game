@@ -1273,21 +1273,25 @@ localStorage.setItem(
 
 if(rareAppeared){
 
-    document.getElementById("message").textContent =
-    "✨レアアイテム出現！";
-
-    document.getElementById("message").style.color =
-    "#c8a24d";
-
     setTimeout(() => {
 
         document.getElementById("message").textContent =
-        "";
+        "✨レアアイテム出現！";
 
         document.getElementById("message").style.color =
-        "#7a8e63";
+        "#c8a24d";
 
-    },2500);
+        setTimeout(() => {
+
+            document.getElementById("message").textContent =
+            "カードをタップしてね！";
+
+            document.getElementById("message").style.color =
+            "#7a8e63";
+
+        },2500);
+
+    },500);
 
 }
 
