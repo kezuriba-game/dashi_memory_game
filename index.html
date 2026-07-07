@@ -1385,12 +1385,9 @@ async function sendClearData(){
         const response = await fetch(
             GAS_URL,
             {
+        
                 method:"POST",
-
-                headers:{
-                    "Content-Type":"application/json"
-                },
-
+                
                 body:JSON.stringify({
 
                     startTime:gameStartTime,
