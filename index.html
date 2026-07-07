@@ -1449,40 +1449,79 @@ function showChallengeClearModal(id){
     .style.display = "none";
 
     document.getElementById("resultText")
-    .innerHTML = `
+.innerHTML = `
 
-    <h3>おめでとうございます
-    <br>
-    「五十嵐鰹節からの挑戦」クリア！
-    </h3>
+<h3>
+おめでとうございます！
+<br>
+「五十嵐鰹節からの挑戦」クリア
+</h3>
 
-    <p>
+<p style="
+    line-height:1.8;
+    margin-top:20px;
+">
+見事挑戦をクリアしたあなたに、
+<br>
+五十嵐鰹節こだわりのだしパック
+「極丸」をプレゼントいたします。
+</p>
+
+<hr style="
+    border:none;
+    border-top:1px solid #ddd;
+    margin:20px 0;
+">
+
+<p>
+<strong>① 応募IDをコピー</strong>
+</p>
+
+<div style="
+    border:2px solid #e0d7c8;
+    border-radius:12px;
+    padding:15px;
+    margin:10px 0 15px 0;
+    background:#faf8f3;
+">
+
+    <div style="
+        font-size:12px;
+        color:#888;
+        margin-bottom:6px;
+    ">
     応募ID
-    </p>
+    </div>
 
     <div style="
         font-size:24px;
         font-weight:bold;
-        margin:15px 0;
         color:#9b3b3b;
+        letter-spacing:0.08em;
     ">
     ${id}
     </div>
 
-    <button
-        onclick="copyId('${id}')"
-        style="
-        width:100%;
-        margin-bottom:12px;
-    ">
-    応募IDをコピー
-    </button>
+</div>
 
-    <button
+<button
+    onclick="copyId('${id}')"
+    style="
+        width:100%;
+        margin-bottom:20px;
+    ">
+    応募IDをコピーする
+</button>
+
+<p>
+<strong>② 公式LINEを友だち追加</strong>
+</p>
+
+<button
     onclick="openLine()"
     style="
         width:100%;
-        margin-bottom:12px;
+        margin-bottom:20px;
         background:#06C755;
         color:white;
         border:none;
@@ -1492,32 +1531,34 @@ function showChallengeClearModal(id){
         font-weight:bold;
     ">
     公式LINEを開く
-    </button>
+</button>
 
-    <p style="
-        font-size:13px;
-        line-height:1.8;
-    ">
-    
-    五十嵐鰹節こだわりの万能だしパック「極丸」をプレゼントいたします。
-    
-    <br><br>
-    
-    ①応募IDをコピー
-    <br>
-    ②五十嵐鰹節公式LINEを友だち追加
-    <br>
-    ③トーク画面に応募IDを送信
-    
-    <br><br>
-    
-    ※応募IDは再表示できませんので、スクリーンショットなどで保存してください。
-    
-    </p>
+<p>
+<strong>③ LINEのトーク画面で応募IDを送信</strong>
+</p>
 
-    `;
-}
+<p style="
+    font-size:13px;
+    line-height:1.8;
+    color:#666;
+">
+応募IDの確認ができましたら、
+プレゼント発送についてご案内いたします。
+</p>
 
+<p style="
+    margin-top:20px;
+    font-size:12px;
+    color:#999;
+">
+※応募IDは再表示できません。
+<br>
+スクリーンショットなどで保存してください。
+</p>
+
+`;
+}    
+    
 function copyId(id){
 
     navigator.clipboard.writeText(id);
