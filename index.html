@@ -1125,6 +1125,11 @@ cards.sort(() => Math.random() - 0.5);
 
             if(card.classList.contains("matched")) return;
 
+            playLog.push({
+                card: item.name,
+                time: Date.now()
+            });
+
             let imagePath = "";
 
             if(stage.mixed){
