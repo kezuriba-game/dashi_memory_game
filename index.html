@@ -1358,18 +1358,23 @@ function showResultModal(){
     document.getElementById("resultModal")
     .style.display = "flex";
 
+    document.getElementById("shareButton")
+    .style.display = "block";
+
     document.getElementById("resultText")
     .innerHTML = `
     難易度：${document.getElementById("difficulty").textContent}<br>
     残り時間：${time}秒
     `;
-
 }
-
+    
 function closeModal(){
 
     document.getElementById("resultModal")
     .style.display = "none";
+
+    document.getElementById("shareButton")
+    .style.display = "block";
 
 }
 
@@ -1440,11 +1445,15 @@ function showChallengeClearModal(id){
     document.getElementById("resultModal")
     .style.display = "flex";
 
+    document.getElementById("shareButton")
+    .style.display = "none";
+
     document.getElementById("resultText")
     .innerHTML = `
 
-    <h3>おめでとう！
-    「五十嵐鰹節からの挑戦」クリア
+    <h3>おめでとうございます
+    <br>
+    「五十嵐鰹節からの挑戦」クリア！
     </h3>
 
     <p>
@@ -1466,7 +1475,7 @@ function showChallengeClearModal(id){
         width:100%;
         margin-bottom:12px;
     ">
-    IDをコピー
+    応募IDをコピー
     </button>
 
     <button
@@ -1490,8 +1499,9 @@ function showChallengeClearModal(id){
         line-height:1.8;
     ">
     
-    五十嵐鰹節こだわりの万能だしパック
-    「極丸」をプレゼント！
+    五十嵐鰹節こだわりの万能だしパック「極丸」をプレゼントいたします。
+    
+    <br><br>
     
     ①応募IDをコピー
     <br>
@@ -1501,8 +1511,7 @@ function showChallengeClearModal(id){
     
     <br><br>
     
-    ※応募IDは再表示できませんので、
-    スクリーンショットなどで保存してください。
+    ※応募IDは再表示できませんので、スクリーンショットなどで保存してください。
     
     </p>
 
@@ -1534,18 +1543,18 @@ function shareResult(){
     document.getElementById("difficulty").textContent;
 
     const text =
-`だし神経衰弱をクリアしました！
-
-難易度：${difficulty}
-残り時間：${time}秒
-
-鰹節屋からの挑戦！
-みんなもチャレンジしてみてね👇
-https://kezuriba-game.github.io/dashi_memory_game/
-
-#だし神経衰弱
-#五十嵐鰹節
-#だしパック極丸`;
+        `だし神経衰弱をクリアしました！
+        
+        難易度：${difficulty}
+        残り時間：${time}秒
+        
+        鰹節屋からの挑戦！
+        みんなもチャレンジしてみてね👇
+        https://kezuriba-game.github.io/dashi_memory_game/
+        
+        #だし神経衰弱
+        #五十嵐鰹節
+        #だしパック極丸`;
 
     window.open(
         `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`,
@@ -1565,7 +1574,7 @@ https://kezuriba-game.github.io/dashi_memory_game/
 
         <p id="resultText"></p>
 
-        <button onclick="shareResult()">
+        <button id="shareButton" onclick="shareResult()">
             Xで結果をシェア
         </button>
 
