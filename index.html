@@ -1221,7 +1221,6 @@ if(firstCard.dataset.name === secondCard.dataset.name){
 
         lock = true;
 
-
 currentDiscovered.forEach(name => {
 
     if(!discovered.includes(name)){
@@ -1240,7 +1239,15 @@ localStorage.setItem(
         document.getElementById("message").textContent =
         "おめでとう！ステージクリア！";
 
-        showResultModal();
+        if(selectedDifficulty === "challenge"){
+            
+            sendClearData();
+        
+        }else{
+            
+            showResultModal();
+        
+        }
 
         startButton.textContent =
         "もう一回遊ぶ";
