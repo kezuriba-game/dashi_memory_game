@@ -1307,6 +1307,9 @@ startButton.onclick = () => {
 
     gameOver = false;
 
+    gameStartTime = Date.now();
+    playLog = [];
+
     time =
     settings[selectedDifficulty].time || 60;
 
