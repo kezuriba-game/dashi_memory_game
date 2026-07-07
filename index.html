@@ -1497,10 +1497,12 @@ function copyId(id){
 
 }
 
-const difficulty =
-document.getElementById("difficulty").textContent;
+function shareResult(){
 
-const text =
+    const difficulty =
+    document.getElementById("difficulty").textContent;
+
+    const text =
 `だし神経衰弱をクリアしました！
 
 難易度：${difficulty}
@@ -1514,10 +1516,10 @@ https://kezuriba-game.github.io/dashi_memory_game/
 #五十嵐鰹節
 #だしパック極丸`;
 
-window.open(
-`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`,
-"_blank"
-);
+    window.open(
+        `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`,
+        "_blank"
+    );
 
 }
     
