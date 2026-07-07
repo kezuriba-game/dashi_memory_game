@@ -1443,11 +1443,9 @@ function showChallengeClearModal(id){
     document.getElementById("resultText")
     .innerHTML = `
 
-    <h3>おめでとう！</h3>
-
-    <p>
-    五十嵐鰹節からの挑戦クリア！
-    </p>
+    <h3>おめでとう！
+    「五十嵐鰹節からの挑戦」クリア
+    </h3>
 
     <p>
     応募ID
@@ -1467,18 +1465,45 @@ function showChallengeClearModal(id){
         style="
         width:100%;
         margin-bottom:12px;
-        "
-    >
+    ">
     IDをコピー
+    </button>
+
+    <button
+    onclick="openLine()"
+    style="
+        width:100%;
+        margin-bottom:12px;
+        background:#06C755;
+        color:white;
+        border:none;
+        border-radius:10px;
+        padding:12px;
+        font-size:16px;
+        font-weight:bold;
+    ">
+    公式LINEを開く
     </button>
 
     <p style="
         font-size:13px;
         line-height:1.8;
     ">
-    この画面をスクリーンショットして、
-    InstagramのDMで
-    応募IDと一緒に送ってください。
+    
+    五十嵐鰹節こだわりの万能だしパック
+    「極丸」をプレゼント！
+    
+    ①応募IDをコピー
+    <br>
+    ②五十嵐鰹節公式LINEを友だち追加
+    <br>
+    ③トーク画面に応募IDを送信
+    
+    <br><br>
+    
+    ※応募IDは再表示できませんので、
+    スクリーンショットなどで保存してください。
+    
     </p>
 
     `;
@@ -1490,6 +1515,15 @@ function copyId(id){
 
     alert(
         "応募IDをコピーしました！"
+    );
+
+}
+
+function openLine(){
+
+    window.open(
+        "https://lin.ee/R4HYaRH",
+        "_blank"
     );
 
 }
