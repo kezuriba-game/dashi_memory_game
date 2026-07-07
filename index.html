@@ -762,6 +762,9 @@ let gameOver = false;
 
 let gameStartTime = 0;
 let playLog = [];
+
+const GAS_URL =
+"https://script.google.com/macros/s/AKfycbwArL_naynxc3eCyBt4it8J7q1oIe3MfoC2Z5MzkdcYF0MP5mjYIiDFhn9HaqdFK1o8/exec";
     
 function updateUI(){
 
@@ -1364,6 +1367,130 @@ function closeModal(){
 }
 
 function shareResult(){
+
+    async function sendClearData(){
+
+    const playTime =
+    Math.floor(
+        (Date.now() - gameStartTime) / 1000
+    );
+
+    try{
+
+        const response = await fetch(
+            GAS_URL,
+            {
+                method:"POST",
+
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+                body:JSON.stringify({
+
+                    startTime:gameStartTime,
+
+                    clearTime:Date.now(),
+
+                    playTime:playTime,
+
+                    logCount:playLog.length,
+
+                    playLog:playLog
+
+                })
+
+            }
+        );
+
+        const result =
+        await response.json();
+
+        if(result.success){
+
+            showChallengeClearModal(
+                result.id
+            );
+
+        }else{
+
+            alert(
+                "応募ID発行エラー\n" +
+                result.message
+            );
+
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            "通信エラーが発生しました"
+        );
+
+    }
+
+}
+
+function showChallengeClearModal(id){
+
+    document.getElementById("resultModal")
+    .style.display = "flex";
+
+    document.getElementById("resultText")
+    .innerHTML = `
+
+    <h3>おめでとう！</h3>
+
+    <p>
+    五十嵐鰹節からの挑戦クリア！
+    </p>
+
+    <p>
+    応募ID
+    </p>
+
+    <div style="
+        font-size:24px;
+        font-weight:bold;
+        margin:15px 0;
+        color:#9b3b3b;
+    ">
+    ${id}
+    </div>
+
+    <button
+        onclick="copyId('${id}')"
+        style="
+        width:100%;
+        margin-bottom:12px;
+        "
+    >
+    IDをコピー
+    </button>
+
+    <p style="
+        font-size:13px;
+        line-height:1.8;
+    ">
+    この画面をスクリーンショットして、
+    InstagramのDMで
+    応募IDと一緒に送ってください。
+    </p>
+
+    `;
+}
+
+function copyId(id){
+
+    navigator.clipboard.writeText(id);
+
+    alert(
+        "応募IDをコピーしました！"
+    );
+
+}
 
 const difficulty =
 document.getElementById("difficulty").textContent;
