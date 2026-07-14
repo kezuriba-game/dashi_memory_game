@@ -1176,6 +1176,9 @@ cards.sort(() => Math.random() - 0.5);
 
 }
 
+flipSound.currentTime = 0;
+flipSound.play();
+            
             card.innerHTML =
             `<img src="${imagePath}">`;
 
@@ -1198,6 +1201,9 @@ if(firstCard.dataset.name === secondCard.dataset.name){
 
     updateUI();
 
+correctSound.currentTime = 0;
+correctSound.play();
+    
     document.getElementById("message").textContent =
     "⭕ 正解！";
 
@@ -1245,6 +1251,8 @@ localStorage.setItem(
     "discovered",
     JSON.stringify(discovered)
 );
+
+clearSound.play();
         
         document.getElementById("message").textContent =
         "おめでとう！ステージクリア！";
@@ -1271,6 +1279,9 @@ localStorage.setItem(
 
 }else{
 
+missSound.currentTime = 0;
+missSound.play();
+    
     document.getElementById("message").textContent =
     "❌ ミス！";
 
@@ -1303,6 +1314,8 @@ if(rareAppeared){
 
     setTimeout(() => {
 
+rareSound.play();
+        
         document.getElementById("message").textContent =
         "✨レアアイテム出現！";
 
