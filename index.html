@@ -1178,6 +1178,11 @@ cards.sort(() => Math.random() - 0.5);
 
 flipSound.currentTime = 0;
 flipSound.play();
+
+if(item.category === "item"){
+    rareSound.currentTime = 0;
+    rareSound.play();
+}
             
             card.innerHTML =
             `<img src="${imagePath}">`;
