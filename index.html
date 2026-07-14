@@ -1176,16 +1176,40 @@ cards.sort(() => Math.random() - 0.5);
 
 }
 
-flipSound.currentTime = 0;
-flipSound.play();
+card.innerHTML =
+`<img src="${imagePath}">`;
 
-if(item.category === "item"){
-    rareSound.currentTime = 0;
-    rareSound.play();
+// 1枚目だけ音を鳴らす
+if(!firstCard){
+
+    // レアカードだったら
+    if(item.category === "item"){
+
+        rareSound.currentTime = 0;
+        rareSound.play();
+
+        document.getElementById("message").textContent =
+        "✨レアアイテム出現！";
+        
+        document.getElementById("message").style.color =
+        "#c8a24d";
+        
+        setTimeout(() => 
+            { document.getElementById("message").textContent =
+            "カードをタップしてね！";
+             
+            document.getElementById("message").style.color =
+            "#7a8e63";
+}, 2000);
+
+    }else{
+
+        flipSound.currentTime = 0;
+        flipSound.play();
+
+    }
+
 }
-            
-            card.innerHTML =
-            `<img src="${imagePath}">`;
 
             if(!firstCard){
 
@@ -1314,30 +1338,6 @@ missSound.play();
         game.appendChild(card);
 
     });
-
-if(rareAppeared){
-
-    setTimeout(() => {
-        
-        document.getElementById("message").textContent =
-        "✨レアアイテム出現！";
-
-        document.getElementById("message").style.color =
-        "#c8a24d";
-
-        setTimeout(() => {
-
-            document.getElementById("message").textContent =
-            "カードをタップしてね！";
-
-            document.getElementById("message").style.color =
-            "#7a8e63";
-
-        },2500);
-
-    },500);
-
-}
 
 }
 
