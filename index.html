@@ -607,6 +607,16 @@ opacity:0.9;
     
 <script>
 
+const flipSound = new Audio("sounds/flip.mp3");
+const correctSound = new Audio("sounds/correct.mp3");
+const missSound = new Audio("sounds/miss.mp3");
+const clearSound = new Audio("sounds/clear.mp3");
+const rareSound = new Audio("sounds/rare.mp3");
+
+const bgm = new Audio("sounds/bgm.mp3");
+bgm.loop = true;
+bgm.volume = 0.25;
+
 const tips = [
 "💡 レアアイテムが出現することも！",
 "💡 達人ステージは文字がないよ！画像だけでペアをそろえよう！",
